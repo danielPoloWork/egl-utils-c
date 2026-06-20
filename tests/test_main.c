@@ -31,5 +31,7 @@ int main(void)
     suite_semaphore();
     suite_atomic_queue();
     suite_thread_pool();
+    suite_file();
+    suite_path();
     return UNITY_END();
 }

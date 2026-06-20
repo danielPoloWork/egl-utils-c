@@ -58,11 +58,11 @@ The thinnest slice that compiles, tests, and ships under the full quality bar.
 - [x] 5.2 `d4np_str_parse_int` (#17) — overflow-safe integer parse returning `d4np_status_t`.
 - [x] 5.3 `d4np_str_parse_float` (#17) — robust float parse with explicit error reporting.
 
-## Milestone 6 — File system & I/O (`d4np/io`)
+## Milestone 6 — File system & I/O (`d4np/io`) ✅
 
-- [ ] 6.1 `d4np_file_read_all` (#18) — read a whole file into an allocator-backed buffer.
-- [ ] 6.2 `d4np_file_write_all` (#19) — atomic write (temp + rename) with flush.
-- [ ] 6.3 `d4np_path_combine` (#20) — OS-separator-aware safe path join.
+- [x] 6.1 `d4np_file_read_all` (#18) — read a whole file into an allocator-backed buffer.
+- [x] 6.2 `d4np_file_write_all` (#19) — atomic write (temp + fsync + rename).
+- [x] 6.3 `d4np_path_combine` (#20) — OS-separator-aware safe path join.
 
 ## Milestone 7 — System utilities & diagnostics (`d4np/sys`)
 

@@ -39,6 +39,10 @@
 #include "d4np/ds/string_builder.h"
 #include "d4np/ds/vector.h"
 
+/* File system & I/O */
+#include "d4np/io/file.h"
+#include "d4np/io/path.h"
+
 /* Strings & parsing */
 #include "d4np/str/parse.h"
 #include "d4np/str/str_view.h"
