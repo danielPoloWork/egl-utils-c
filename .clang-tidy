@@ -1,0 +1,17 @@
+# d4np-c static analysis profile. CI runs clang-tidy with warnings-as-errors on changed
+# .c/.h files (see .github/workflows/ci.yml and AGENTS.md §8).
+Checks: >
+  clang-analyzer-*,
+  bugprone-*,
+  cert-*,
+  performance-*,
+  portability-*,
+  readability-*,
+  misc-*,
+  -readability-identifier-length,
+  -readability-magic-numbers,
+  -misc-no-recursion,
+  -bugprone-easily-swappable-parameters
+WarningsAsErrors: '*'
+HeaderFilterRegex: '^d4np/.*'
+FormatStyle: file

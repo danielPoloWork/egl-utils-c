@@ -1,0 +1,84 @@
+# go.yaml — Go toolchain profile
+#
+# Go's module path replaces the namespace; the race detector is a first-class sanitizer.
+# The flat-ish Go convention is reconciled with the cross-language tree by placing the
+# module under src/main/go/<group>/<slug> with the module path matching.
+
+lang:             go
+display_name:     "Go"
+default_standard: "Go 1.22"
+src_ext:          go
+
+namespace_pattern: "github.com/{owner}/{project_slug}"       # module path = import path
+import_idiom:      "import \"github.com/{owner}/{project_slug}\""
+
+toolchain:
+  build_tool:      "go build (go modules)"
+  pkg_manager:     "go modules (go.mod / go.sum)"
+  test_framework:  "go test (+ testify; rapid for property tests)"
+  formatter:       "gofumpt (gofmt superset)"
+  linter:          "golangci-lint (govet, staticcheck, errcheck, revive, gosec)"
+  sanitizers:      "go test -race (data-race detector), go vet, govulncheck"
+  coverage_tool:   "go test -coverprofile (go tool cover)"
+  doc_tool:        "godoc / pkg.go.dev"
+  version_file:    "version.go"           # under src_main
+  version_const_hint: "const Version = \"X.Y.Z\""
+  package_ecosystem: "gomod"              # Dependabot ecosystem
+
+commands:
+  build:        "go build ./..."
+  test:         "go test ./..."
+  format_check: "test -z \"$(gofumpt -l .)\""
+  lint:         "golangci-lint run"
+  bench:        "go test -bench=. -benchmem ./..."    # "" if no bench
+
+config_files:
+  - go.mod
+  - .golangci.yml
+
+ci:
+  tier1_platforms: "Linux / Windows / macOS on Go 1.21 & 1.22"
+  matrix:
+    - { os: ubuntu-24.04, toolchain: "go-1.21", preset: test }
+    - { os: ubuntu-24.04, toolchain: "go-1.22", preset: test }
+    - { os: windows-2022, toolchain: "go-1.22", preset: test }
+    - { os: macos-14,     toolchain: "go-1.22", preset: test }
+  setup_steps: |
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: ${{ matrix.toolchain == 'go-1.21' && '1.21' || '1.22' }}
+        cache: true
+  extra_jobs: |
+    quality:
+      name: quality / lint + race + vuln
+      runs-on: ubuntu-24.04
+      steps:
+        - uses: actions/checkout@v6
+        - uses: actions/setup-go@v5
+          with: { go-version: '1.22', cache: true }
+        - name: gofumpt
+          run: go install mvdan.cc/gofumpt@v0.10.0 && test -z "$(gofumpt -l .)"
+        - uses: golangci/golangci-lint-action@v6
+        - name: race + vuln
+          run: |
+            go test -race ./...
+            go install golang.org/x/vuln/cmd/govulncheck@v1.4.0 && govulncheck ./...
+  race_job: |
+    race:
+      name: race / data-race detector
+      runs-on: ubuntu-24.04
+      steps:
+        - uses: actions/checkout@v6
+        - uses: actions/setup-go@v5
+          with: { go-version: '1.22', cache: true }
+        - run: go test -race ./...
+
+supports:
+  threading_sanitizer: true    # -race is the canonical data-race gate
+  bench: true
+  abi_stability: false         # source compatibility via Go module semantics
+notes: >
+  The module import path doubles as the namespace, so {{NAMESPACE}} = the module path.
+  -race is mandatory in CI whenever the threading flag is on — it is Go's TSan. govulncheck
+  is the supply-chain gate (maps to the reference's security posture).

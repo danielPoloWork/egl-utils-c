@@ -1,0 +1,99 @@
+# project.yaml — the single source of truth for one generated project.
+#
+# Copy this skeleton to `orchestrator/project.yaml`, fill it from the intake interview
+# merged with the resolved language profile, and confirm it with the maintainer BEFORE
+# rendering. Every value here resolves a placeholder from placeholders.md. A worked
+# example (the reference project itself) is shown in comments at each field.
+
+identity:
+  project_name:    ""        # e.g. pbr-cpp-memory-pool         -> {{PROJECT_NAME}}
+  project_slug:    ""        # e.g. memorypool                  -> {{PROJECT_SLUG}}
+  project_title:   ""        # e.g. High-Performance Memory Pool-> {{PROJECT_TITLE}}
+  project_tagline: ""        # e.g. Fixed-block O(1) memory pool-> {{PROJECT_TAGLINE}}
+  project_series:  ""        # e.g. Purpose-Built References     -> {{PROJECT_SERIES}} (blank ok)
+  project_kind:    library   # library|service|cli|app          -> {{PROJECT_KIND}}
+
+ownership:
+  owner:           ""        # GitHub login   e.g. danielPoloWork -> {{OWNER}}
+  maintainer:      ""        # e.g. Daniel Polo                   -> {{MAINTAINER}}
+  author:          ""        # copyright holder                  -> {{AUTHOR}}
+  year:            "2026"    #                                   -> {{YEAR}}
+  license_id:      MIT       #                                   -> {{LICENSE_ID}}
+  default_branch:  main      #                                   -> {{DEFAULT_BRANCH}}
+  assignee:        "@me"     #                                   -> {{ASSIGNEE}}
+
+language:
+  lang:            ""        # source-tree segment  e.g. cpp     -> {{LANG}}
+  lang_name:       ""        # e.g. C++17                        -> {{LANG_NAME}}
+  lang_standard:   ""        # e.g. C++17 (ISO/IEC 14882:2017)   -> {{LANG_STANDARD}}
+  secondary_lang:  ""        # interop lang or "" (e.g. c)
+  group_path:      "it/d4np" #                                   -> {{GROUP_PATH}}
+  group_dotted:    "it.d4np" #                                   -> {{GROUP_DOTTED}}
+  namespace:       ""        # native idiom e.g. it::d4np::memorypool -> {{NAMESPACE}}
+  src_ext:         ""        # primary extension  e.g. cpp       -> {{SRC_EXT}}
+  public_include_hint: ""    # e.g. #include <it/d4np/memorypool/memory_pool.h>
+
+# Derived from language + group_path + project_slug (computed during render):
+#   src_main  = src/main/<lang>/<group_path>/<project_slug>      -> {{SRC_MAIN}}
+#   src_test  = src/test/<lang>/<group_path>/<project_slug>      -> {{SRC_TEST}}
+#   src_bench = src/bench/<lang>/<group_path>/<project_slug>     -> {{SRC_BENCH}}
+
+toolchain:                   # defaults pulled from profiles/<lang>.yaml, overridable
+  build_tool:      ""        # -> {{BUILD_TOOL}}
+  pkg_manager:     ""        # -> {{PKG_MANAGER}}
+  test_framework:  ""        # -> {{TEST_FRAMEWORK}}
+  formatter:       ""        # -> {{FORMATTER}}
+  linter:          ""        # -> {{LINTER}}
+  sanitizers:      ""        # -> {{SANITIZERS}}
+  coverage_tool:   ""        # -> {{COVERAGE_TOOL}}
+  coverage_target: 80        # percent line coverage
+  doc_tool:        ""        # -> {{DOC_TOOL}}
+  version_file:    ""        # -> {{VERSION_FILE}}
+  version_const_hint: ""     # -> {{VERSION_CONST_HINT}}
+  package_ecosystem: ""      # Dependabot ecosystem (from profile) -> {{PKG_ECOSYSTEM}}
+  commands:
+    build:        ""         # -> {{CMD_BUILD}}
+    test:         ""         # -> {{CMD_TEST}}
+    format_check: ""         # -> {{CMD_FORMAT_CHECK}}
+    lint:         ""         # -> {{CMD_LINT}}
+    bench:        ""         # -> {{CMD_BENCH}} (blank if no bench)
+
+ci:                          # from profiles/<lang>.yaml
+  tier1_platforms: ""        # -> {{TIER1_PLATFORMS}}
+  matrix: []                 # list of {os, toolchain, preset} cells -> {{#EACH_CI_CELL}}
+  setup_steps: ""            # YAML snippet to set up the toolchain  -> {{CI_SETUP_STEPS}}
+  extra_jobs:   ""           # YAML snippet for sanitizer/valgrind/… -> {{CI_EXTRA_JOBS}}
+
+governance:
+  scopes: [api, build, tests, docs, ci]          # -> {{#EACH_SCOPE}}
+  # Two distinct version fields — do not swap them (render validates start_version is X.Y.Z):
+  version_start: "pre-1.0 milestone-driven"       # PROSE policy descriptor      -> {{VERSION_START}}
+  start_version: "0.0.0"                           # NUMERIC X.Y.Z seed (badge++) -> {{START_VERSION}}
+  house_rules: ""                                 # org overlay (from config/) -> {{HOUSE_RULES}}
+  capabilities:                                   # the {{#IF_*}} flags
+    bench:      false
+    threading:  false
+    public_api: true
+    i18n:       false
+    packaging:  false
+    service:    false
+    announce:   false
+
+i18n:                          # documentation translations (gated by capabilities.i18n)
+  default_lang: "en"           # canonical on-disk language          -> {{DOC_DEFAULT_LANG}}
+  targets: []                  # e.g. [{code: it, name: Italian}, {code: es, name: Spanish}]
+                               #                                      -> {{#EACH_DOC_LANG}}
+
+announce:                      # release/news announcements (gated by capabilities.announce)
+  channels: []                 # e.g. [{name: X, handle: "@d4np", mode: draft},
+                               #       {name: Discord, handle: "<webhook>", mode: draft}]
+                               #                                      -> {{#EACH_ANNOUNCE_CHANNEL}}
+
+spec:                         # from Phase 5 of the interview
+  objective:        ""        # -> {{SPEC_OBJECTIVE}}
+  functional_reqs:  []        # -> {{#EACH_FUNCTIONAL_REQ}}
+  nonfunctional_reqs: []      # -> {{#EACH_NONFUNCTIONAL_REQ}}
+  architecture:     ""        # prose + diagram for the spec & first ADRs
+  public_api:       []        # -> {{#EACH_PUBLIC_API}}
+  verification:     ""        # -> {{SPEC_VERIFICATION}}
+  milestone1_items: []        # -> {{#EACH_MILESTONE1_ITEM}}

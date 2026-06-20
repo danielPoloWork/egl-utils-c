@@ -1,0 +1,18 @@
+# Lessons ledger — the factory's durable, generalizable memory.
+# Read at the start of a run; append (drafted, human-approved) after corrections.
+# Schema per entry (validated by tools/eaao_lint.py): id, date, scope, context, rule, [source].
+# scope is one of: global | lang:<lang> | kind:<library|service|cli|app>.
+
+- id: L-0001
+  date: 2026-06-16
+  scope: global
+  context: A multi-line block (CI setup steps) injected into a template landed at column 0, producing invalid YAML.
+  rule: A placeholder that injects a multi-line block must carry the target indentation, and the renderer must indent continuation lines to that column.
+  source: feat(tools) deterministic renderer
+
+- id: L-0002
+  date: 2026-06-16
+  scope: global
+  context: A capability flag (i18n) gated a lint check whose required file had no template, so enabling it failed the generated lint on day zero.
+  rule: Every capability flag that a check depends on must ship the artifact that check reads; verify by rendering a variant with the flag on.
+  source: feat i18n subsystem

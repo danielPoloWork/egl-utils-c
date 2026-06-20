@@ -1,0 +1,37 @@
+# Software Specification: {{PROJECT_TITLE}} ({{LANG_NAME}})
+
+> Rendered from the intake interview (Phase 5). Frozen contract: diverging implementation
+> updates this spec in the same PR or adds an ADR superseding the relevant section.
+
+## 1. Objective & Business Context
+
+{{SPEC_OBJECTIVE}}
+
+## 2. Functional Requirements
+
+{{#EACH_FUNCTIONAL_REQ}}- {{.}}
+{{/EACH_FUNCTIONAL_REQ}}
+
+## 3. Non-Functional Requirements
+
+{{#EACH_NONFUNCTIONAL_REQ}}- {{.}}
+{{/EACH_NONFUNCTIONAL_REQ}}
+
+## 4. Logical Architecture & Core Algorithm
+
+{{SPEC_ARCHITECTURE}}
+
+## 5. Public Interface
+
+Consumers import via `{{PUBLIC_INCLUDE_HINT}}`. The public surface:
+
+{{#EACH_PUBLIC_API}}- {{.}}
+{{/EACH_PUBLIC_API}}
+
+## 6. Verification & Test Strategy
+
+{{SPEC_VERIFICATION}}
+
+Toolchain: built with {{BUILD_TOOL}}, tested with {{TEST_FRAMEWORK}}, checked with
+{{SANITIZERS}}, coverage target ≥ {{COVERAGE_TARGET}}% line. Every functional and
+non-functional requirement above maps to a CI gate (see [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml)).
