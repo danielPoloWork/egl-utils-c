@@ -21,6 +21,8 @@ PR. A release PR moves the `[Unreleased]` entries into a new per-version file un
   pool `d4np_pool_init/alloc/free/destroy` (#4-#5), both O(1); benchmarks under `bench/mem`.
 - `d4np/ds`: generic `d4np_vector_t` with geometric growth (#6) and `d4np_string_builder_t`
   with amortized O(1) appends (#10), both allocator-injected.
+- `d4np/ds`: generic `d4np_hashmap_t` (open addressing + linear probing, pluggable hash/eq,
+  default FNV-1a) (#7) and intrusive `d4np_linked_list_t` with O(1) insert/remove (#8).
 
 ### Changed
 

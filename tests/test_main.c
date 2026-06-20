@@ -23,5 +23,7 @@ int main(void)
     suite_pool();
     suite_vector();
     suite_string_builder();
+    suite_hashmap();
+    suite_linked_list();
     return UNITY_END();
 }

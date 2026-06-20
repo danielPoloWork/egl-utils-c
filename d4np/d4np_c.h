@@ -27,6 +27,8 @@
 #include "d4np/mem/pool.h"
 
 /* Generic data structures */
+#include "d4np/ds/hashmap.h"
+#include "d4np/ds/linked_list.h"
 #include "d4np/ds/string_builder.h"
 #include "d4np/ds/vector.h"
 

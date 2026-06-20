@@ -37,6 +37,8 @@ add_library(d4np
     d4np/mem/pool.c
     d4np/ds/vector.c
     d4np/ds/string_builder.c
+    d4np/ds/hashmap.c
+    d4np/ds/linked_list.c
     d4np/str/str_view.c)
 add_library(d4np::d4np ALIAS d4np)
 
@@ -72,7 +74,9 @@ if(D4NP_BUILD_TESTS)
         tests/mem/test_arena.c
         tests/mem/test_pool.c
         tests/ds/test_vector.c
-        tests/ds/test_string_builder.c)
+        tests/ds/test_string_builder.c
+        tests/ds/test_hashmap.c
+        tests/ds/test_linked_list.c)
     target_include_directories(d4np_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
     target_link_libraries(d4np_tests PRIVATE d4np::d4np unity)
 

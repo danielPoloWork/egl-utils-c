@@ -38,8 +38,8 @@ The thinnest slice that compiles, tests, and ships under the full quality bar.
 ## Milestone 3 — Generic data structures (`d4np/ds`)
 
 - [x] 3.1 `d4np_vector_t` (#6) — dynamic array, geometric growth, allocator-injected.
-- [ ] 3.2 `d4np_hashmap_t` (#7) — open addressing + linear probing (cache-friendly).
-- [ ] 3.3 `d4np_linked_list_t` (#8) — intrusive doubly-linked list.
+- [x] 3.2 `d4np_hashmap_t` (#7) — open addressing + linear probing (cache-friendly).
+- [x] 3.3 `d4np_linked_list_t` (#8) — intrusive doubly-linked list.
 - [ ] 3.4 `d4np_ring_buffer_t` (#9) — thread-safe SPSC circular buffer (verified under TSan).
 - [x] 3.5 `d4np_string_builder_t` (#10) — efficient dynamic string assembly.
 - [ ] 3.6 Benchmarks under `bench/ds` (vector growth, hashmap probe distance).
