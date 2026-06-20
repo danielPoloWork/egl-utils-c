@@ -49,3 +49,6 @@ htmlcov/
 .questions
 .bugs
 .claude/settings.local.json
+
+# Vendored EAAO factory (regeneration tooling only; not needed to build/test the library)
+.eaao-core/
