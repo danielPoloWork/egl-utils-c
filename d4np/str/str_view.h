@@ -50,6 +50,14 @@ bool d4np_str_view_equals(d4np_str_view_t a, d4np_str_view_t b);
  */
 bool d4np_str_view_split_next(d4np_str_view_t *sv, char sep, d4np_str_view_t *out);
 
+/*
+ * Zero-allocation split of `sv` on `sep` into a caller-provided array. Writes at most
+ * `max_out` fields into `out` and returns the TOTAL number of fields in `sv` (same field
+ * semantics as d4np_str_view_split_next). If the return value exceeds `max_out` the output was
+ * truncated; call with `max_out == 0` (and any `out`) to count first, then size the array.
+ */
+size_t d4np_str_split(d4np_str_view_t sv, char sep, d4np_str_view_t *out, size_t max_out);
+
 #ifdef __cplusplus
 }
 #endif

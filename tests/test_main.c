@@ -19,6 +19,7 @@ int main(void)
 {
     UNITY_BEGIN();
     suite_str();
+    suite_parse();
     suite_arena();
     suite_pool();
     suite_vector();

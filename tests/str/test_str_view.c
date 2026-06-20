@@ -121,6 +121,29 @@ static void test_version_string(void)
     TEST_ASSERT_EQUAL_STRING("0.0.0", D4NP_VERSION_STRING);
 }
 
+static void test_split_into_array(void)
+{
+    d4np_str_view_t fields[8];
+    size_t count = d4np_str_split(d4np_str_view_from_str("a,b,c"), ',', fields, 8);
+    TEST_ASSERT_EQUAL_size_t(3, count);
+    expect_view(fields[0], "a");
+    expect_view(fields[1], "b");
+    expect_view(fields[2], "c");
+}
+
+static void test_split_reports_total_and_truncates(void)
+{
+    d4np_str_view_t fields[2];
+    /* 4 fields but room for 2: returns the true total, writes only the first two. */
+    size_t count = d4np_str_split(d4np_str_view_from_str("w:x:y:z"), ':', fields, 2);
+    TEST_ASSERT_EQUAL_size_t(4, count);
+    expect_view(fields[0], "w");
+    expect_view(fields[1], "x");
+
+    /* Counting pass: max_out == 0 writes nothing but still returns the total. */
+    TEST_ASSERT_EQUAL_size_t(4, d4np_str_split(d4np_str_view_from_str("w:x:y:z"), ':', NULL, 0));
+}
+
 void suite_str(void)
 {
     RUN_TEST(test_from_str_basic);
@@ -134,4 +157,6 @@ void suite_str(void)
     RUN_TEST(test_allocator_default_roundtrip);
     RUN_TEST(test_status_str);
     RUN_TEST(test_version_string);
+    RUN_TEST(test_split_into_array);
+    RUN_TEST(test_split_reports_total_and_truncates);
 }

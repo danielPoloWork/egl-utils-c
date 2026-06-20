@@ -52,11 +52,11 @@ The thinnest slice that compiles, tests, and ships under the full quality bar.
 - [x] 4.4 `d4np_thread_pool_t` (#12) — native threads + internal task queue (graceful drain on shutdown).
 - [x] 4.5 Stress tests + benchmarks under `bench/concurrency`; whole module green under TSan (mutex ~15 ns, atomic_queue enq+deq ~57 ns, pool dispatch ~0.5 M tasks/s).
 
-## Milestone 5 — Strings & parsing (`d4np/str`)
+## Milestone 5 — Strings & parsing (`d4np/str`) ✅
 
-- [ ] 5.1 `d4np_str_split` (#16) — zero-allocation split into a caller-provided view array.
-- [ ] 5.2 `d4np_str_parse_int` (#17) — overflow-safe integer parse returning `d4np_status_t`.
-- [ ] 5.3 `d4np_str_parse_float` (#17) — robust float parse with explicit error reporting.
+- [x] 5.1 `d4np_str_split` (#16) — zero-allocation split into a caller-provided view array.
+- [x] 5.2 `d4np_str_parse_int` (#17) — overflow-safe integer parse returning `d4np_status_t`.
+- [x] 5.3 `d4np_str_parse_float` (#17) — robust float parse with explicit error reporting.
 
 ## Milestone 6 — File system & I/O (`d4np/io`)
 

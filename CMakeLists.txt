@@ -44,7 +44,8 @@ add_library(d4np
     d4np/concurrency/semaphore.c
     d4np/concurrency/atomic_queue.c
     d4np/concurrency/thread_pool.c
-    d4np/str/str_view.c)
+    d4np/str/str_view.c
+    d4np/str/parse.c)
 add_library(d4np::d4np ALIAS d4np)
 
 target_include_directories(d4np
@@ -75,10 +76,14 @@ if(D4NP_BUILD_TESTS)
         GIT_REPOSITORY https://github.com/ThrowTheSwitch/Unity.git
         GIT_TAG v2.6.0)
     FetchContent_MakeAvailable(unity)
+    # Enable Unity's double-precision assertions (off by default); PUBLIC so the test target
+    # that links unity also sees the macro when including unity.h.
+    target_compile_definitions(unity PUBLIC UNITY_INCLUDE_DOUBLE)
 
     add_executable(d4np_tests
         tests/test_main.c
         tests/str/test_str_view.c
+        tests/str/test_parse.c
         tests/mem/test_arena.c
         tests/mem/test_pool.c
         tests/ds/test_vector.c

@@ -40,6 +40,7 @@
 #include "d4np/ds/vector.h"
 
 /* Strings & parsing */
+#include "d4np/str/parse.h"
 #include "d4np/str/str_view.h"
 
 #endif /* D4NP_C_H */
