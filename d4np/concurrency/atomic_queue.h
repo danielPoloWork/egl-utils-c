@@ -33,9 +33,9 @@ typedef struct d4np_atomic_queue_node d4np_atomic_queue_node;
 typedef struct d4np_atomic_queue {
     const d4np_allocator_t *allocator;
     size_t elem_size;
-    size_t node_size;                /* allocation size per node (header + element) */
-    d4np_atomic_queue_node *head;    /* consumer-owned: points at the dummy/last-read node */
-    d4np_atomic_queue_node *tail;    /* producer-owned: most recently enqueued node          */
+    size_t node_size;             /* allocation size per node (header + element) */
+    d4np_atomic_queue_node *head; /* consumer-owned: points at the dummy/last-read node */
+    d4np_atomic_queue_node *tail; /* producer-owned: most recently enqueued node          */
 } d4np_atomic_queue_t;
 
 /*

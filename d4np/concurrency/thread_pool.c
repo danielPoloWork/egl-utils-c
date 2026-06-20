@@ -89,8 +89,7 @@ static void pool_worker(d4np_thread_pool_t *pool)
 
 /* ---- public API -------------------------------------------------------- */
 
-d4np_status_t d4np_thread_pool_init(d4np_thread_pool_t *pool, const d4np_allocator_t *allocator,
-                                    size_t thread_count)
+d4np_status_t d4np_thread_pool_init(d4np_thread_pool_t *pool, const d4np_allocator_t *allocator, size_t thread_count)
 {
     if (pool == NULL || thread_count == 0) {
         return D4NP_ERR_INVALID_ARGUMENT;
@@ -150,8 +149,7 @@ d4np_status_t d4np_thread_pool_submit(d4np_thread_pool_t *pool, d4np_task_fn fn,
     if (pool == NULL || fn == NULL) {
         return D4NP_ERR_INVALID_ARGUMENT;
     }
-    d4np_task_node *node =
-        (d4np_task_node *)d4np_alloc(pool->allocator, sizeof(*node), alignof(d4np_task_node));
+    d4np_task_node *node = (d4np_task_node *)d4np_alloc(pool->allocator, sizeof(*node), alignof(d4np_task_node));
     if (node == NULL) {
         return D4NP_ERR_OUT_OF_MEMORY;
     }

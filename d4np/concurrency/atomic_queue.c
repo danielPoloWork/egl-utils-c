@@ -27,7 +27,7 @@ struct d4np_atomic_queue_node {
 };
 
 #define D4NP_AQ_ALIGN (_Alignof(d4np_aq_max_align_t))
-#define D4NP_AQ_DATA_OFFSET                                                                                      \
+#define D4NP_AQ_DATA_OFFSET                                                                                            \
     (((sizeof(struct d4np_atomic_queue_node) + (D4NP_AQ_ALIGN - 1)) / D4NP_AQ_ALIGN) * D4NP_AQ_ALIGN)
 
 static unsigned char *node_data(d4np_atomic_queue_node *n)

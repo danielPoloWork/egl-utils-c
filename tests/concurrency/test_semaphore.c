@@ -18,8 +18,8 @@ static void test_trywait_respects_count(void)
     TEST_ASSERT_TRUE(d4np_semaphore_trywait(&s));  /* 1 -> 0 */
     TEST_ASSERT_FALSE(d4np_semaphore_trywait(&s)); /* 0: no permit */
 
-    d4np_semaphore_post(&s);                       /* 0 -> 1 */
-    TEST_ASSERT_TRUE(d4np_semaphore_trywait(&s));  /* 1 -> 0 */
+    d4np_semaphore_post(&s);                      /* 0 -> 1 */
+    TEST_ASSERT_TRUE(d4np_semaphore_trywait(&s)); /* 1 -> 0 */
 
     d4np_semaphore_destroy(&s);
 }
@@ -32,7 +32,7 @@ typedef struct {
 static void poster_worker(void *arg)
 {
     handoff_arg *a = (handoff_arg *)arg;
-    *a->shared = 42;            /* produce a value ... */
+    *a->shared = 42;             /* produce a value ... */
     d4np_semaphore_post(a->sem); /* ... then publish it */
 }
 

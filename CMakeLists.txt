@@ -105,4 +105,7 @@ if(D4NP_BUILD_BENCH)
 
     add_executable(d4np_bench_ds bench/ds/bench_ds.c)
     target_link_libraries(d4np_bench_ds PRIVATE d4np::d4np)
+
+    add_executable(d4np_bench_concurrency bench/concurrency/bench_concurrency.c)
+    target_link_libraries(d4np_bench_concurrency PRIVATE d4np::d4np)
 endif()

@@ -44,13 +44,13 @@ The thinnest slice that compiles, tests, and ships under the full quality bar.
 - [x] 3.5 `d4np_string_builder_t` (#10) — efficient dynamic string assembly.
 - [x] 3.6 Benchmarks under `bench/ds` (vector push ~6 ns, hashmap put/get ~90 ns, ring buffer push+pop ~7 ns).
 
-## Milestone 4 — Concurrency & synchronization (`d4np/concurrency`)
+## Milestone 4 — Concurrency & synchronization (`d4np/concurrency`) ✅
 
 - [x] 4.1 `d4np_mutex_t` (#11) — portable shim over pthread/win32.
 - [x] 4.2 `d4np_semaphore_t` (#14) — counting semaphore (in-process; named/IPC variant in M8.5).
 - [x] 4.3 `d4np_atomic_queue_t` (#13) — lock-free SPSC over `<stdatomic.h>` (unbounded, node-based).
 - [x] 4.4 `d4np_thread_pool_t` (#12) — native threads + internal task queue (graceful drain on shutdown).
-- [ ] 4.5 Stress tests + benchmarks under `bench/concurrency`; whole module green under TSan.
+- [x] 4.5 Stress tests + benchmarks under `bench/concurrency`; whole module green under TSan (mutex ~15 ns, atomic_queue enq+deq ~57 ns, pool dispatch ~0.5 M tasks/s).
 
 ## Milestone 5 — Strings & parsing (`d4np/str`)
 

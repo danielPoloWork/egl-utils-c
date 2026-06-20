@@ -35,6 +35,8 @@ PR. A release PR moves the `[Unreleased]` entries into a new per-version file un
 - `d4np/concurrency`: `d4np_thread_pool_t` — native worker threads draining a mutex-guarded FIFO
   task queue signalled by a semaphore; graceful shutdown runs every queued task before joining
   (#12). Multi-threaded test submits 50k tasks across 4 workers.
+- `bench/concurrency`: throughput benchmarks (mutex, atomic queue, thread-pool dispatch) using a
+  monotonic wall clock.
 
 ### Changed
 

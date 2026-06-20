@@ -38,7 +38,7 @@ typedef struct d4np_task_node d4np_task_node;
 
 typedef struct d4np_thread_pool {
     const d4np_allocator_t *allocator;
-    void *threads;          /* opaque array of native thread handles */
+    void *threads; /* opaque array of native thread handles */
     size_t thread_count;
     d4np_mutex_t lock;      /* guards the task queue + shutting_down  */
     d4np_semaphore_t items; /* counts queued tasks / shutdown wakeups */
@@ -52,8 +52,7 @@ typedef struct d4np_thread_pool {
  * (NULL -> default). Returns D4NP_OK, D4NP_ERR_INVALID_ARGUMENT, D4NP_ERR_OUT_OF_MEMORY, or
  * D4NP_ERR_INTERNAL (thread/primitive creation failed).
  */
-d4np_status_t d4np_thread_pool_init(d4np_thread_pool_t *pool, const d4np_allocator_t *allocator,
-                                    size_t thread_count);
+d4np_status_t d4np_thread_pool_init(d4np_thread_pool_t *pool, const d4np_allocator_t *allocator, size_t thread_count);
 
 /*
  * Submit a task. Returns D4NP_OK, D4NP_ERR_INVALID_ARGUMENT, D4NP_ERR_OUT_OF_MEMORY, or
