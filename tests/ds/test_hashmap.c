@@ -13,10 +13,8 @@ static void test_init_rejects_bad_args(void)
     d4np_hashmap_t m;
     TEST_ASSERT_EQUAL_INT(D4NP_ERR_INVALID_ARGUMENT,
                           d4np_hashmap_init(NULL, NULL, sizeof(int), sizeof(int), 0, NULL, NULL));
-    TEST_ASSERT_EQUAL_INT(D4NP_ERR_INVALID_ARGUMENT,
-                          d4np_hashmap_init(&m, NULL, 0, sizeof(int), 0, NULL, NULL));
-    TEST_ASSERT_EQUAL_INT(D4NP_ERR_INVALID_ARGUMENT,
-                          d4np_hashmap_init(&m, NULL, sizeof(int), 0, 0, NULL, NULL));
+    TEST_ASSERT_EQUAL_INT(D4NP_ERR_INVALID_ARGUMENT, d4np_hashmap_init(&m, NULL, 0, sizeof(int), 0, NULL, NULL));
+    TEST_ASSERT_EQUAL_INT(D4NP_ERR_INVALID_ARGUMENT, d4np_hashmap_init(&m, NULL, sizeof(int), 0, 0, NULL, NULL));
 }
 
 static void test_put_get_overwrite(void)

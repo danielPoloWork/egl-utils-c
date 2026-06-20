@@ -31,8 +31,8 @@ typedef struct d4np_ring_buffer {
     const d4np_allocator_t *allocator;
     unsigned char *buffer;
     size_t elem_size;
-    size_t capacity; /* number of slots, a power of two */
-    size_t mask;     /* capacity - 1                    */
+    size_t capacity;    /* number of slots, a power of two */
+    size_t mask;        /* capacity - 1                    */
     atomic_size_t head; /* consumer: index of the next element to read  */
     atomic_size_t tail; /* producer: index of the next slot to write    */
 } d4np_ring_buffer_t;

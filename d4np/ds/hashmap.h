@@ -32,16 +32,16 @@ typedef bool (*d4np_key_eq_fn)(const void *a, const void *b, size_t key_size);
 
 typedef struct d4np_hashmap {
     const d4np_allocator_t *allocator;
-    uint8_t *control;        /* per-slot state: empty / occupied / deleted */
-    unsigned char *keys;     /* capacity * key_stride, max-aligned slots    */
-    unsigned char *values;   /* capacity * value_stride, max-aligned slots  */
+    uint8_t *control;      /* per-slot state: empty / occupied / deleted */
+    unsigned char *keys;   /* capacity * key_stride, max-aligned slots    */
+    unsigned char *values; /* capacity * value_stride, max-aligned slots  */
     size_t key_size;
     size_t value_size;
     size_t key_stride;
     size_t value_stride;
-    size_t capacity;         /* power of two (0 before first insert)         */
-    size_t len;              /* occupied slots                              */
-    size_t tombstones;       /* deleted slots awaiting reclamation          */
+    size_t capacity;   /* power of two (0 before first insert)         */
+    size_t len;        /* occupied slots                              */
+    size_t tombstones; /* deleted slots awaiting reclamation          */
     d4np_hash_fn hash;
     d4np_key_eq_fn key_eq;
 } d4np_hashmap_t;
@@ -53,8 +53,7 @@ typedef struct d4np_hashmap {
  * D4NP_ERR_INVALID_ARGUMENT, D4NP_ERR_OVERFLOW, or D4NP_ERR_OUT_OF_MEMORY.
  */
 d4np_status_t d4np_hashmap_init(d4np_hashmap_t *m, const d4np_allocator_t *allocator, size_t key_size,
-                                size_t value_size, size_t initial_capacity, d4np_hash_fn hash,
-                                d4np_key_eq_fn key_eq);
+                                size_t value_size, size_t initial_capacity, d4np_hash_fn hash, d4np_key_eq_fn key_eq);
 
 /* Release all storage and zero the map. Safe on a zeroed map. */
 void d4np_hashmap_destroy(d4np_hashmap_t *m);

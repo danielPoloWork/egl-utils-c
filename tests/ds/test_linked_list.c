@@ -45,7 +45,8 @@ static void test_push_back_order_and_iterate(void)
     int expect[] = {10, 20, 30};
     int n = 0;
     d4np_list_node_t *node;
-    D4NP_LIST_FOR_EACH(node, &list) {
+    D4NP_LIST_FOR_EACH(node, &list)
+    {
         TEST_ASSERT_EQUAL_INT(expect[n], value_of(node));
         ++n;
     }

@@ -25,6 +25,7 @@ PR. A release PR moves the `[Unreleased]` entries into a new per-version file un
   default FNV-1a) (#7) and intrusive `d4np_linked_list_t` with O(1) insert/remove (#8).
 - `d4np/ds`: lock-free SPSC `d4np_ring_buffer_t` over C11 atomics (acquire/release), with a
   real multi-threaded producer/consumer test run under ThreadSanitizer in CI (#9).
+- `bench/ds`: throughput benchmarks for the vector, hash map, and ring buffer.
 
 ### Changed
 

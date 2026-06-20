@@ -153,8 +153,7 @@ static d4np_status_t resize(d4np_hashmap_t *m, size_t new_capacity)
 /* ---- public API -------------------------------------------------------- */
 
 d4np_status_t d4np_hashmap_init(d4np_hashmap_t *m, const d4np_allocator_t *allocator, size_t key_size,
-                                size_t value_size, size_t initial_capacity, d4np_hash_fn hash,
-                                d4np_key_eq_fn key_eq)
+                                size_t value_size, size_t initial_capacity, d4np_hash_fn hash, d4np_key_eq_fn key_eq)
 {
     if (m == NULL || key_size == 0 || value_size == 0) {
         return D4NP_ERR_INVALID_ARGUMENT;

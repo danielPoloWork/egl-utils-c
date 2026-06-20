@@ -33,7 +33,7 @@ typedef struct d4np_linked_list {
 #define D4NP_LIST_ENTRY(node_ptr, type, member) ((type *)((char *)(node_ptr) - offsetof(type, member)))
 
 /* Forward iteration: `node` walks each live node (do not free/remove `node` mid-loop). */
-#define D4NP_LIST_FOR_EACH(node, list)                                                                          \
+#define D4NP_LIST_FOR_EACH(node, list)                                                                                 \
     for ((node) = (list)->sentinel.next; (node) != &(list)->sentinel; (node) = (node)->next)
 
 /* Initialize an empty list. No allocation; the caller owns node storage. */
