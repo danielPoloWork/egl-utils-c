@@ -27,6 +27,7 @@
 #include "d4np/mem/pool.h"
 
 /* Concurrency & synchronization */
+#include "d4np/concurrency/atomic_queue.h"
 #include "d4np/concurrency/mutex.h"
 #include "d4np/concurrency/semaphore.h"
 

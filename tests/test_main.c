@@ -28,5 +28,6 @@ int main(void)
     suite_ring_buffer();
     suite_mutex();
     suite_semaphore();
+    suite_atomic_queue();
     return UNITY_END();
 }
