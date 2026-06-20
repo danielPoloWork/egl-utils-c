@@ -26,5 +26,7 @@ int main(void)
     suite_hashmap();
     suite_linked_list();
     suite_ring_buffer();
+    suite_mutex();
+    suite_semaphore();
     return UNITY_END();
 }

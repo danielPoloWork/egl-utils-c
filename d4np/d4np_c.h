@@ -26,6 +26,10 @@
 #include "d4np/mem/arena.h"
 #include "d4np/mem/pool.h"
 
+/* Concurrency & synchronization */
+#include "d4np/concurrency/mutex.h"
+#include "d4np/concurrency/semaphore.h"
+
 /* Generic data structures */
 #include "d4np/ds/hashmap.h"
 #include "d4np/ds/linked_list.h"

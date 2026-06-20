@@ -19,5 +19,7 @@ void suite_string_builder(void);
 void suite_hashmap(void);
 void suite_linked_list(void);
 void suite_ring_buffer(void);
+void suite_mutex(void);
+void suite_semaphore(void);
 
 #endif /* D4NP_TESTS_H */

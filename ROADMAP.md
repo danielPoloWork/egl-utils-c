@@ -46,8 +46,8 @@ The thinnest slice that compiles, tests, and ships under the full quality bar.
 
 ## Milestone 4 — Concurrency & synchronization (`d4np/concurrency`)
 
-- [ ] 4.1 `d4np_mutex_t` (#11) — portable shim over pthread/win32.
-- [ ] 4.2 `d4np_semaphore_t` (#14) — system semaphore (incl. inter-process mode).
+- [x] 4.1 `d4np_mutex_t` (#11) — portable shim over pthread/win32.
+- [x] 4.2 `d4np_semaphore_t` (#14) — counting semaphore (in-process; named/IPC variant in M8.5).
 - [ ] 4.3 `d4np_atomic_queue_t` (#13) — lock-free SPSC over `<stdatomic.h>`.
 - [ ] 4.4 `d4np_thread_pool_t` (#12) — native threads + internal task queue.
 - [ ] 4.5 Stress tests + benchmarks under `bench/concurrency`; whole module green under TSan.

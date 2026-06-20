@@ -26,6 +26,9 @@ PR. A release PR moves the `[Unreleased]` entries into a new per-version file un
 - `d4np/ds`: lock-free SPSC `d4np_ring_buffer_t` over C11 atomics (acquire/release), with a
   real multi-threaded producer/consumer test run under ThreadSanitizer in CI (#9).
 - `bench/ds`: throughput benchmarks for the vector, hash map, and ring buffer.
+- `d4np/concurrency`: portable `d4np_mutex_t` over CRITICAL_SECTION/pthread_mutex_t (#11) and a
+  counting `d4np_semaphore_t` (Win32 semaphore / POSIX mutex+cond, in-process) (#14); both use
+  opaque storage so the public headers need no platform includes. Multi-threaded tests added.
 
 ### Changed
 
