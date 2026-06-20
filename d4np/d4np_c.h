@@ -45,7 +45,9 @@
 
 /* System utilities & diagnostics */
 #include "d4np/sys/clock.h"
+#include "d4np/sys/error_context.h"
 #include "d4np/sys/hash.h"
+#include "d4np/sys/log.h"
 #include "d4np/sys/uuid.h"
 
 /* Strings & parsing */

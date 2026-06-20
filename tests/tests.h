@@ -29,5 +29,7 @@ void suite_path(void);
 void suite_hash(void);
 void suite_clock(void);
 void suite_uuid(void);
+void suite_error_context(void);
+void suite_log(void);
 
 #endif /* D4NP_TESTS_H */

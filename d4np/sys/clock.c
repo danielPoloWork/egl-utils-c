@@ -4,6 +4,9 @@
  * SPDX-License-Identifier: MIT
  * Copyright (c) 2026 Daniel Polo
  */
+/* clock_gettime / CLOCK_MONOTONIC need POSIX.1; the build compiles as strict -std=c11. */
+#define _POSIX_C_SOURCE 200809L
+
 #include "d4np/sys/clock.h"
 
 #if defined(_WIN32)

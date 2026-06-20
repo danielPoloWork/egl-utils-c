@@ -33,7 +33,7 @@ static uint64_t next_random(void)
 {
     if (!g_rng_seeded) {
         uint64_t seed = d4np_timestamp_ns();
-        seed ^= (uint64_t)(uintptr_t)&g_rng_state;     /* per-thread address entropy */
+        seed ^= (uint64_t)(uintptr_t)&g_rng_state; /* per-thread address entropy */
         seed ^= (uint64_t)(uintptr_t)&g_rng_seeded << 17;
         if (seed == 0) {
             seed = 0x123456789ABCDEF0ULL;

@@ -36,5 +36,7 @@ int main(void)
     suite_hash();
     suite_clock();
     suite_uuid();
+    suite_error_context();
+    suite_log();
     return UNITY_END();
 }
