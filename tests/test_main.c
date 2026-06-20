@@ -25,5 +25,6 @@ int main(void)
     suite_string_builder();
     suite_hashmap();
     suite_linked_list();
+    suite_ring_buffer();
     return UNITY_END();
 }

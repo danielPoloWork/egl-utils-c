@@ -39,6 +39,7 @@ add_library(d4np
     d4np/ds/string_builder.c
     d4np/ds/hashmap.c
     d4np/ds/linked_list.c
+    d4np/ds/ring_buffer.c
     d4np/str/str_view.c)
 add_library(d4np::d4np ALIAS d4np)
 
@@ -52,6 +53,9 @@ target_link_libraries(d4np PUBLIC Threads::Threads)
 
 if(MSVC)
     target_compile_options(d4np PRIVATE /W4 /permissive-)
+    # MSVC gates C11 <stdatomic.h> behind this switch; PUBLIC so consumers that include the
+    # ring_buffer header (which uses C11 atomics) also enable it. Drop once MSVC un-gates it.
+    target_compile_options(d4np PUBLIC /experimental:c11atomics)
 else()
     target_compile_options(d4np PRIVATE
         -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes)
@@ -76,7 +80,8 @@ if(D4NP_BUILD_TESTS)
         tests/ds/test_vector.c
         tests/ds/test_string_builder.c
         tests/ds/test_hashmap.c
-        tests/ds/test_linked_list.c)
+        tests/ds/test_linked_list.c
+        tests/ds/test_ring_buffer.c)
     target_include_directories(d4np_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
     target_link_libraries(d4np_tests PRIVATE d4np::d4np unity)
 
