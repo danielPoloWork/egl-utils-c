@@ -26,6 +26,10 @@
 #include "d4np/mem/arena.h"
 #include "d4np/mem/pool.h"
 
+/* Generic data structures */
+#include "d4np/ds/string_builder.h"
+#include "d4np/ds/vector.h"
+
 /* Strings & parsing */
 #include "d4np/str/str_view.h"
 

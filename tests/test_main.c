@@ -21,5 +21,7 @@ int main(void)
     suite_str();
     suite_arena();
     suite_pool();
+    suite_vector();
+    suite_string_builder();
     return UNITY_END();
 }
