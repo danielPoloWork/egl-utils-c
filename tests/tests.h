@@ -22,5 +22,6 @@ void suite_ring_buffer(void);
 void suite_mutex(void);
 void suite_semaphore(void);
 void suite_atomic_queue(void);
+void suite_thread_pool(void);
 
 #endif /* D4NP_TESTS_H */

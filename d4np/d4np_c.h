@@ -30,6 +30,7 @@
 #include "d4np/concurrency/atomic_queue.h"
 #include "d4np/concurrency/mutex.h"
 #include "d4np/concurrency/semaphore.h"
+#include "d4np/concurrency/thread_pool.h"
 
 /* Generic data structures */
 #include "d4np/ds/hashmap.h"
