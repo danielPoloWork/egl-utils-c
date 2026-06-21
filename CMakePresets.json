@@ -1,0 +1,85 @@
+{
+  "version": 2,
+  "cmakeMinimumRequired": { "major": 3, "minor": 20 },
+  "configurePresets": [
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "D4NP_BUILD_TESTS": "ON"
+      }
+    },
+    {
+      "name": "release",
+      "displayName": "Release",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "D4NP_BUILD_TESTS": "ON"
+      }
+    },
+    {
+      "name": "asan",
+      "displayName": "AddressSanitizer + UBSan (POSIX/Clang/GCC only)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/asan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "D4NP_BUILD_TESTS": "ON",
+        "CMAKE_C_FLAGS": "-fsanitize=address,undefined -fno-omit-frame-pointer -fno-sanitize-recover=all -g"
+      }
+    },
+    {
+      "name": "ubsan",
+      "displayName": "UndefinedBehaviorSanitizer (POSIX/Clang/GCC only)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/ubsan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "D4NP_BUILD_TESTS": "ON",
+        "CMAKE_C_FLAGS": "-fsanitize=undefined -fno-omit-frame-pointer -fno-sanitize-recover=all -g"
+      }
+    },
+    {
+      "name": "tsan",
+      "displayName": "ThreadSanitizer (POSIX/Clang/GCC only)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/tsan",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "D4NP_BUILD_TESTS": "ON",
+        "CMAKE_C_FLAGS": "-fsanitize=thread -fno-omit-frame-pointer -g"
+      }
+    },
+    {
+      "name": "bench",
+      "displayName": "Benchmarks (optimized)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/bench",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "D4NP_BUILD_TESTS": "OFF",
+        "D4NP_BUILD_BENCH": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "debug", "configurePreset": "debug" },
+    { "name": "release", "configurePreset": "release" },
+    { "name": "asan", "configurePreset": "asan" },
+    { "name": "ubsan", "configurePreset": "ubsan" },
+    { "name": "tsan", "configurePreset": "tsan" },
+    { "name": "bench", "configurePreset": "bench" }
+  ],
+  "testPresets": [
+    { "name": "debug", "configurePreset": "debug", "output": { "outputOnFailure": true } },
+    { "name": "release", "configurePreset": "release", "output": { "outputOnFailure": true } },
+    { "name": "asan", "configurePreset": "asan", "output": { "outputOnFailure": true } },
+    { "name": "ubsan", "configurePreset": "ubsan", "output": { "outputOnFailure": true } },
+    { "name": "tsan", "configurePreset": "tsan", "output": { "outputOnFailure": true } }
+  ]
+}
