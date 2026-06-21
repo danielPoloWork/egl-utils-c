@@ -12,6 +12,16 @@ public functions/types/endpoints and any documented compatibility guarantees (in
 where applicable), plus any user-visible configuration knobs and the
 package/target name.
 
+## ABI stability (since v1.0.0)
+
+From `1.0.0` the public **API and ABI** are frozen for the whole 1.x line
+([ADR-0008](../adr/0008-freeze-public-abi-for-1x.md)). Beyond signatures and semantics, the ABI
+explicitly includes **struct layouts — notably the `opaque[N]` storage sizes and `_Alignas` of the
+concurrency primitives** — and **enum numeric values**. Enum constants may only be *appended*
+(never renumbered), and an `opaque[N]` size may not grow or shrink within 1.x. Any such change is a
+**MAJOR (2.0)** event. The `_Static_assert`s guarding the opaque sizes catch an accidental
+overgrowth at compile time.
+
 ## Decision tree — which level?
 
 1. **Does the change remove, rename, or alter the signature/semantics of any public symbol,

@@ -10,6 +10,4 @@ README badge.
 
 | Version | Date | Highlights | Notes |
 |---------|------|------------|-------|
-| —       | —    | —          | —     |
-
-_No releases yet — the first one lands when Milestone 1 ships._
+| [1.0.0](v1.0.0.md) | 2026-06-21 | First stable release — all 25 spec functions; ABI frozen for 1.x | draft (maintainer publishes) |

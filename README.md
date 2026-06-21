@@ -2,7 +2,7 @@
 
 > a dependency-free, high-performance C11 systems utility library (allocators, containers, concurrency, strings, I/O, diagnostics)
 
-![Status](https://img.shields.io/badge/Status-v0.0.0-blue)
+![Status](https://img.shields.io/badge/Status-v1.0.0-blue)
 
 A
 library written in **C11**, built and governed to an enterprise quality
@@ -157,7 +157,14 @@ d4np_uuid_format(&id, text);
 
 | # | Title | Status |
 |---|---|---|
-| 1 | Project bootstrap & CI | ⏳ in progress |
+| 1 | Project bootstrap, foundation & first slice | ✅ done |
+| 2 | Memory & allocators (`d4np/mem`) | ✅ done |
+| 3 | Generic data structures (`d4np/ds`) | ✅ done |
+| 4 | Concurrency & synchronization (`d4np/concurrency`) | ✅ done |
+| 5 | Strings & parsing (`d4np/str`) | ✅ done |
+| 6 | File system & I/O (`d4np/io`) | ✅ done |
+| 7 | System utilities & diagnostics (`d4np/sys`) | ✅ done |
+| 8 | Hardening & 1.0 release | ✅ done |
 
 ## License
 
