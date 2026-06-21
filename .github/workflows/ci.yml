@@ -133,6 +133,9 @@ jobs:
       - name: Build the benchmark suite
         shell: bash
         run: cmake --preset bench && cmake --build --preset bench
+      - name: Enforce the performance gate (fails on a catastrophic regression)
+        shell: bash
+        run: ./build/bench/d4np_perf_gate
 
 
   # Data-race / concurrency gate — runs only when the project exposes concurrency.
