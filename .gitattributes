@@ -23,7 +23,6 @@ GEMINI.md               export-ignore
 
 # --- planning / spec / dev meta files ---
 ROADMAP.md              export-ignore
-spec-d4np-utils-c.md    export-ignore
 .clang-format           export-ignore
 .clang-tidy             export-ignore
 .gitignore              export-ignore
