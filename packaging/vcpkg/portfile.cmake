@@ -3,15 +3,16 @@
 # d4np-c is a static C library with no third-party dependencies (only the platform threads
 # library), so the port is a plain CMake configure/install/fixup.
 #
-# NOTE: SHA512 below is a placeholder. No release tag exists yet (see the project's integration
-# status). On the first `vX.Y.Z` tag, set REF to that tag and replace the SHA512 with the value
-# vcpkg prints on a hash mismatch (run the port once with the placeholder to obtain it).
+# REF tracks the port version (vcpkg.json), so it resolves to the `v${VERSION}` git tag. The
+# SHA512 is over GitHub's source archive for that tag (the implementation-only export-ignore
+# bundle). To refresh on a new release: bump vcpkg.json, then replace the SHA512 with the value
+# vcpkg prints on a hash mismatch (or `curl -sL .../archive/v<ver>.tar.gz | sha512sum`).
 
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO danielPoloWork/egl-utils-c
     REF "v${VERSION}"
-    SHA512 0
+    SHA512 5ae2a35e353a5e2b35433181838ed3d7d32ce8a75102ecd9473291e6c65d37eaa111ca345002425d85f45456ea24e66031d6f0710aa9a4ce3af60c1f28705ce9
     HEAD_REF master
 )
 

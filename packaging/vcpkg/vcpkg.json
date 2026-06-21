@@ -1,7 +1,7 @@
 {
   "$comment": "vcpkg port manifest for d4np-c. Use as an overlay port (--overlay-ports) until the port is upstreamed to the vcpkg registry. The version tracks d4np/core/version.h (consistency lint enforces lockstep).",
   "name": "d4np-c",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Dependency-free, high-performance C11 systems utility library (allocators, containers, concurrency, strings, I/O, diagnostics).",
   "homepage": "https://github.com/danielPoloWork/egl-utils-c",
   "license": "MIT",
