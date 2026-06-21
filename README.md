@@ -23,6 +23,13 @@ cmake --build --preset debug
 ctest --preset debug --output-on-failure
 ```
 
+Line coverage (GCC/Clang; enforces the ≥80% gate over `d4np/`, see
+[ADR-0003](docs/adr/0003-enforce-line-coverage-gate.md)):
+
+```bash
+tools/coverage.sh        # build + test instrumented, then gcovr --fail-under-line 80
+```
+
 - **Toolchain:** CMake + Ninja, Unity, clang-format, clang-tidy + cppcheck.
 - **Supported platforms:** Linux x86_64 (GCC>=11, Clang>=14), Windows x86_64 (MSVC>=19.30), macOS arm64 (Apple Clang>=14).
 - Consumers import the public surface via: `#include "d4np_c.h"`.

@@ -21,6 +21,7 @@ endif()
 
 option(D4NP_BUILD_TESTS "Build the d4np-c unit tests" ON)
 option(D4NP_BUILD_BENCH "Build the d4np-c benchmarks" OFF)
+option(D4NP_ENABLE_COVERAGE "Instrument the library and tests for line coverage (GCC/Clang only)" OFF)
 
 # The concurrency module wraps pthread/win32; pull in the platform threads library now so the
 # public target carries it for consumers.
@@ -71,6 +72,26 @@ if(MSVC)
 else()
     target_compile_options(d4np PRIVATE
         -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes)
+endif()
+
+# ---------------------------------------------------------------------------
+# Coverage instrumentation (M8.1) — GCC/Clang only, opt-in via the `coverage`
+# preset. We instrument the library sources (PRIVATE compile flags) and propagate
+# the link flag PUBLICly so any consumer that links d4np — notably d4np_tests —
+# emits the .gcda counters at exit. gcovr (see tools/coverage.sh) then enforces
+# the >=80% line gate over d4np/ only. See ADR-0003.
+# ---------------------------------------------------------------------------
+if(D4NP_ENABLE_COVERAGE)
+    if(NOT (CMAKE_C_COMPILER_ID STREQUAL "GNU" OR CMAKE_C_COMPILER_ID MATCHES "Clang"))
+        message(FATAL_ERROR
+            "D4NP_ENABLE_COVERAGE requires GCC or Clang (got ${CMAKE_C_COMPILER_ID}).")
+    endif()
+    target_compile_options(d4np PRIVATE --coverage -O0 -g)
+    target_link_options(d4np PUBLIC --coverage)
+    if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
+        # Emit absolute paths in the .gcno/.gcda so gcovr resolves sources from any CWD.
+        target_compile_options(d4np PRIVATE -fprofile-abs-path)
+    endif()
 endif()
 
 # ---------------------------------------------------------------------------

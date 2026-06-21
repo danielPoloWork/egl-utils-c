@@ -49,6 +49,9 @@ PR. A release PR moves the `[Unreleased]` entries into a new per-version file un
 - `d4np/sys`: thread-local `d4np_error_context_push`/`pop`/`clear`/`depth` for an error trail
   (#22); thread-safe leveled `d4np_log_write` with timestamped records and a configurable
   sink/min-level (#21). With this, all 25 spec functions are implemented.
+- Build/CI: opt-in `D4NP_ENABLE_COVERAGE` CMake option + `coverage` preset (GCC/Clang
+  `--coverage`), a reproducible `tools/coverage.sh` runner, and a CI job enforcing a
+  ≥80% line-coverage gate over `d4np/` via gcovr (ADR-0003).
 
 ### Changed
 
