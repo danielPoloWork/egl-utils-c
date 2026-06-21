@@ -59,6 +59,10 @@ PR. A release PR moves the `[Unreleased]` entries into a new per-version file un
   → `d4np::d4np` work for downstreams; a vcpkg port (`packaging/vcpkg/`) and a Conan 2.x recipe
   (`packaging/conan/`) wrap the same export. A cross-platform CI `install` job verifies a
   `find_package` consumer against a real install prefix (ADR-0005).
+- Compatibility: a `D4NP_PEDANTIC` option + `pedantic` preset build the library as strict ISO
+  C11 (`-pedantic-errors`, no extensions), gated across GCC/Clang/Apple Clang by a CI `pedantic`
+  job; `docs/development/compatibility.md` documents the C11 floor and the compiler/platform
+  matrix (ADR-0006).
 
 ### Changed
 

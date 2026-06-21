@@ -21,3 +21,4 @@ Status transitions: `Proposed` → `Accepted` → (`Superseded by ADR-XXXX` | `D
 | [0003](0003-enforce-line-coverage-gate.md) | Enforce an 80% line-coverage gate via gcovr in CI | Accepted |
 | [0004](0004-generate-api-docs-with-doxygen.md) | Generate the API reference with Doxygen, gated warning-free in CI | Accepted |
 | [0005](0005-package-via-cmake-export-vcpkg-and-conan.md) | Distribute via CMake install/export, a vcpkg port, and a Conan recipe | Accepted |
+| [0006](0006-require-c11-language-floor.md) | Require C11 as the language floor; verify with a broad-reach pedantic build | Accepted |

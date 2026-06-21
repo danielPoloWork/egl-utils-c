@@ -22,6 +22,7 @@ endif()
 option(D4NP_BUILD_TESTS "Build the d4np-c unit tests" ON)
 option(D4NP_BUILD_BENCH "Build the d4np-c benchmarks" OFF)
 option(D4NP_ENABLE_COVERAGE "Instrument the library and tests for line coverage (GCC/Clang only)" OFF)
+option(D4NP_PEDANTIC "Build the library as strict ISO C11 with warnings-as-errors (broad-reach gate)" OFF)
 # Default the install/export rules ON for a top-level build, OFF when d4np-c is pulled in as a
 # subproject (add_subdirectory / FetchContent), so a consumer's `install` stays uncluttered.
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
@@ -81,9 +82,18 @@ if(MSVC)
     # MSVC gates C11 <stdatomic.h> behind this switch; PUBLIC so consumers that include the
     # ring_buffer header (which uses C11 atomics) also enable it. Drop once MSVC un-gates it.
     target_compile_options(d4np PUBLIC /experimental:c11atomics)
+    # Broad-reach (M8.4): MSVC conformance is already enforced by /permissive- above plus
+    # /std:c11 (CMAKE_C_STANDARD 11 + CMAKE_C_EXTENSIONS OFF); D4NP_PEDANTIC adds nothing here.
 else()
     target_compile_options(d4np PRIVATE
         -Wall -Wextra -Wpedantic -Wconversion -Wshadow -Wstrict-prototypes)
+    # Broad-reach gate (M8.4): pure ISO C11 (CMAKE_C_EXTENSIONS OFF -> -std=c11). -pedantic-errors
+    # makes any use of a GNU/compiler extension a hard error, proving the library is strictly
+    # conforming. Scoped to conformance — it deliberately does not add -Werror over the wider
+    # warning set. See ADR-0006 and docs/development/compatibility.md.
+    if(D4NP_PEDANTIC)
+        target_compile_options(d4np PRIVATE -pedantic-errors)
+    endif()
 endif()
 
 # ---------------------------------------------------------------------------

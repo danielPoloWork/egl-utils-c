@@ -219,3 +219,26 @@ jobs:
           cmake --build build/consumer
           ctest --test-dir build/consumer --output-on-failure
 
+  # Broad-reach conformance gate (M8.4) — the library must compile as strict ISO C11 with no
+  # compiler extensions (-pedantic-errors) on every GCC/Clang toolchain. MSVC conformance is
+  # covered by /permissive- in the build matrix. See ADR-0006 + docs/development/compatibility.md.
+  pedantic:
+    name: pedantic / strict C11 / ${{ matrix.os }} / ${{ matrix.toolchain }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-24.04, toolchain: gcc,   cc: gcc }
+          - { os: ubuntu-24.04, toolchain: clang, cc: clang }
+          - { os: macos-14,     toolchain: apple-clang, cc: clang }
+    env:
+      CC: ${{ matrix.cc }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: lukka/get-cmake@e0566b3900d662ef5b1dc36fb560c4d2b1b6d6bd # v4.3.3
+      - name: Build the library under -std=c11 -pedantic-errors
+        shell: bash
+        run: cmake --preset pedantic && cmake --build --preset pedantic
+

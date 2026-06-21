@@ -67,6 +67,17 @@
       }
     },
     {
+      "name": "pedantic",
+      "displayName": "Strict ISO C11 broad-reach (-pedantic-errors)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/pedantic",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "D4NP_BUILD_TESTS": "OFF",
+        "D4NP_PEDANTIC": "ON"
+      }
+    },
+    {
       "name": "bench",
       "displayName": "Benchmarks (optimized)",
       "generator": "Ninja",
@@ -85,6 +96,7 @@
     { "name": "ubsan", "configurePreset": "ubsan" },
     { "name": "tsan", "configurePreset": "tsan" },
     { "name": "coverage", "configurePreset": "coverage" },
+    { "name": "pedantic", "configurePreset": "pedantic" },
     { "name": "bench", "configurePreset": "bench" }
   ],
   "testPresets": [

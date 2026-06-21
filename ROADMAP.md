@@ -77,7 +77,9 @@ The thinnest slice that compiles, tests, and ships under the full quality bar.
 - [x] 8.1 Coverage gate ≥80% line across all modules (llvm-cov/gcovr) enforced in CI.
 - [x] 8.2 Doxygen API docs published; README quickstart per module group.
 - [x] 8.3 Packaging: vcpkg port + Conan recipe; install/export CMake targets.
-- [ ] 8.4 C99-pedantic compatibility job (broad-reach build) and a documented compat matrix.
+- [x] 8.4 Strict-C11 broad-reach conformance job (`-pedantic-errors`, no extensions) and a
+      documented compatibility matrix. (Reworded from "C99-pedantic": the library depends on C11
+      atomics/`alignof`/`_Thread_local`, so C99 is infeasible — see ADR-0006.)
 - [ ] 8.5 Multi-process test harness for `d4np_semaphore_t` IPC; perf thresholds gated in CI.
 - [ ] 8.6 Cut `1.0.0` — freeze the public ABI, write release notes, tag.
 
