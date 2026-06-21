@@ -113,7 +113,9 @@ jobs:
       - name: Build the unit tests
         run: cmake --preset debug && cmake --build --preset debug
       - name: Run the unit tests under Valgrind
-        run: valgrind --leak-check=full --error-exitcode=1 ./build/debug/d4np_tests
+        # --fair-sched=yes timeslices threads round-robin so a busy-wait spin loop (the SPSC
+        # ring-buffer test) cannot starve its peer under Valgrind's serialized scheduler.
+        run: valgrind --fair-sched=yes --leak-check=full --error-exitcode=1 ./build/debug/d4np_tests
 
   # Reproducible performance gate — runs only when the project has a benchmark suite.
   benchmark:
