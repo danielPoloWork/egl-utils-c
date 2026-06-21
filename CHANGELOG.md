@@ -52,6 +52,9 @@ PR. A release PR moves the `[Unreleased]` entries into a new per-version file un
 - Build/CI: opt-in `D4NP_ENABLE_COVERAGE` CMake option + `coverage` preset (GCC/Clang
   `--coverage`), a reproducible `tools/coverage.sh` runner, and a CI job enforcing a
   ≥80% line-coverage gate over `d4np/` via gcovr (ADR-0003).
+- Docs: the full public surface is now documented with Doxygen comments and grouped by module;
+  a `docs/Doxyfile` + `docs/api/mainpage.md` generate the API reference, gated warning-free by a
+  CI `docs` job (ADR-0004). README gains a per-module-group quickstart.
 
 ### Changed
 

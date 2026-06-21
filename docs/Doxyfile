@@ -1,0 +1,45 @@
+# Doxygen configuration for d4np-c (roadmap M8.2; see ADR-0004).
+#
+# Curated, minimal config: any option not set here keeps its Doxygen default. Run from the
+# repository root so the relative INPUT paths resolve:
+#
+#     doxygen docs/Doxyfile
+#
+# Output lands in docs/doxygen/html/ (git-ignored). The build is warning-clean and CI treats
+# any warning as an error (WARN_AS_ERROR=FAIL_ON_WARNINGS).
+
+# --- Project identity -------------------------------------------------------
+PROJECT_NAME           = "d4np-c"
+PROJECT_NUMBER         = 0.0.0
+PROJECT_BRIEF          = "Dependency-free, high-performance C11 systems utility library"
+OUTPUT_DIRECTORY       = docs/doxygen
+
+# --- Inputs -----------------------------------------------------------------
+# The public headers carry the API docs; mainpage.md is the landing page.
+INPUT                  = d4np docs/api/mainpage.md
+FILE_PATTERNS          = *.h *.md
+RECURSIVE              = YES
+USE_MDFILE_AS_MAINPAGE = docs/api/mainpage.md
+
+# --- C-friendly extraction --------------------------------------------------
+OPTIMIZE_OUTPUT_FOR_C  = YES
+EXTRACT_ALL            = YES
+EXTRACT_STATIC         = NO
+JAVADOC_AUTOBRIEF      = YES
+MARKDOWN_SUPPORT       = YES
+TAB_SIZE               = 4
+TYPEDEF_HIDES_STRUCT   = YES
+SORT_MEMBER_DOCS       = NO
+
+# --- Warnings as the quality gate ------------------------------------------
+QUIET                  = YES
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = NO
+WARN_IF_DOC_ERROR      = YES
+WARN_NO_PARAMDOC       = NO
+WARN_AS_ERROR          = FAIL_ON_WARNINGS
+
+# --- Output -----------------------------------------------------------------
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+HAVE_DOT               = NO

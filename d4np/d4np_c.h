@@ -1,5 +1,6 @@
-/*
- * d4np-c — umbrella public header.
+/**
+ * @file d4np_c.h
+ * @brief Umbrella public header — pulls in the whole d4np-c surface.
  *
  * SPDX-License-Identifier: MIT
  * Copyright (c) 2026 Daniel Polo
@@ -13,6 +14,27 @@
  *     #include "d4np/str/str_view.h"
  *
  * As modules from the spec land, their public headers are added below.
+ *
+ * @defgroup d4np_core Core foundation
+ * @brief Status codes, pluggable allocator, and the library version.
+ *
+ * @defgroup d4np_mem Memory & allocators
+ * @brief Arena (bump-pointer) and fixed-block pool allocators.
+ *
+ * @defgroup d4np_ds Data structures
+ * @brief Vector, hash map, intrusive linked list, ring buffer, and string builder.
+ *
+ * @defgroup d4np_concurrency Concurrency & synchronization
+ * @brief Portable mutex, counting semaphore, lock-free SPSC queue, and thread pool.
+ *
+ * @defgroup d4np_str Strings & parsing
+ * @brief Non-owning string views, splitting, and overflow-safe number parsing.
+ *
+ * @defgroup d4np_io File system & I/O
+ * @brief Whole-file read/write and OS-aware path joining.
+ *
+ * @defgroup d4np_sys System utilities & diagnostics
+ * @brief Logger, thread-local error context, monotonic clock, UUIDv4, and FNV-1a hashing.
  */
 #ifndef D4NP_C_H
 #define D4NP_C_H

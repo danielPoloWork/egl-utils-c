@@ -11,10 +11,14 @@ releases.
 
 ## What it is
 
->
+A single, dependency-free toolbox of the building blocks C systems code rewrites on every
+project — allocators, containers, concurrency primitives, string/parse helpers, file I/O, and
+diagnostics — each allocator-injected, error-checked, and verified under sanitizers. The
+library links against nothing but libc and the platform threads library.
 
 The frozen specification is in
-[`docs/specs/01_spec_d4np.md`](docs/specs/01_spec_d4np.md).
+[`docs/specs/01_spec_d4np.md`](docs/specs/01_spec_d4np.md). The full API reference is generated
+with Doxygen (`doxygen docs/Doxyfile` → `docs/doxygen/html/`).
 
 ## Build, test, run
 
@@ -36,6 +40,88 @@ tools/coverage.sh        # build + test instrumented, then gcovr --fail-under-li
 
 See [`docs/development/local-build.md`](docs/development/local-build.md) for the full local
 setup.
+
+## Quickstart by module group
+
+Include the whole surface with `#include "d4np_c.h"`, or one module via its public header.
+Error handling is elided below for brevity — every fallible call returns a `d4np_status_t`
+(`D4NP_OK == 0`) or a documented `NULL`/sentinel.
+
+**`core`** — pluggable allocator + status codes:
+
+```c
+#include "d4np/core/d4np_allocator.h"
+const d4np_allocator_t *a = d4np_allocator_default();
+void *p = d4np_alloc(a, 256, 16);
+d4np_free(a, p, 256);
+```
+
+**`mem`** — arena (bump-pointer) and fixed-block pool allocators:
+
+```c
+#include "d4np/mem/arena.h"
+d4np_arena_t arena;
+d4np_arena_init(&arena, NULL, 64 * 1024);   /* NULL -> default allocator */
+char *buf = d4np_arena_alloc(&arena, 128, 16);
+d4np_arena_reset(&arena);                    /* O(1) bulk free */
+d4np_arena_destroy(&arena);
+```
+
+**`ds`** — vector, hash map, linked list, ring buffer, string builder:
+
+```c
+#include "d4np/ds/vector.h"
+d4np_vector_t v;
+d4np_vector_init(&v, NULL, sizeof(int), 0);
+int x = 42;
+d4np_vector_push(&v, &x);
+int *first = d4np_vector_at(&v, 0);
+d4np_vector_destroy(&v);
+```
+
+**`concurrency`** — mutex, semaphore, lock-free SPSC queue, thread pool:
+
+```c
+#include "d4np/concurrency/thread_pool.h"
+static void work(void *arg) { (void)arg; /* ... */ }
+d4np_thread_pool_t pool;
+d4np_thread_pool_init(&pool, NULL, 4);
+d4np_thread_pool_submit(&pool, work, NULL);
+d4np_thread_pool_destroy(&pool);             /* graceful drain + join */
+```
+
+**`str`** — string views, splitting, overflow-safe parsing:
+
+```c
+#include "d4np/str/parse.h"
+d4np_str_view_t sv = d4np_str_view_from_str("42");
+int64_t n;
+if (d4np_str_parse_int(sv, 0, &n) == D4NP_OK) { /* n == 42 */ }
+```
+
+**`io`** — whole-file read/write (durable, atomic) + path joining:
+
+```c
+#include "d4np/io/file.h"
+#include "d4np/io/path.h"
+char path[256];
+d4np_path_combine(path, sizeof path, "/tmp", "out.bin");
+d4np_file_write_all(path, "hi", 2);          /* temp + fsync + rename */
+unsigned char *data; size_t len;
+d4np_file_read_all(path, NULL, &data, &len);
+d4np_free(NULL, data, len);
+```
+
+**`sys`** — logger, error context, monotonic clock, UUIDv4, FNV-1a:
+
+```c
+#include "d4np/sys/log.h"
+#include "d4np/sys/uuid.h"
+d4np_log_write(D4NP_LOG_INFO, "user %d connected", 7);
+d4np_uuid_t id; char text[D4NP_UUID_STRING_LEN];
+d4np_uuid_generate(&id);
+d4np_uuid_format(&id, text);
+```
 
 ## How this project is run
 
