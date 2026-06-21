@@ -10,8 +10,12 @@
 
 #include <string.h>
 
-void setUp(void) {}
-void tearDown(void) {}
+void setUp(void)
+{
+}
+void tearDown(void)
+{
+}
 
 static void expect_view(d4np_str_view_t v, const char *literal)
 {

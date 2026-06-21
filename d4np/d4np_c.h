@@ -18,9 +18,9 @@
 #define D4NP_C_H
 
 /* Foundation */
-#include "d4np/core/version.h"
-#include "d4np/core/d4np_status.h"
 #include "d4np/core/d4np_allocator.h"
+#include "d4np/core/d4np_status.h"
+#include "d4np/core/version.h"
 
 /* Strings & parsing */
 #include "d4np/str/str_view.h"

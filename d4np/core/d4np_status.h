@@ -17,15 +17,15 @@ extern "C" {
 #endif
 
 typedef enum d4np_status {
-    D4NP_OK = 0,                 /* success                                            */
-    D4NP_ERR_INVALID_ARGUMENT,   /* a NULL or out-of-range argument was passed         */
-    D4NP_ERR_OUT_OF_MEMORY,      /* an allocator returned no memory                    */
-    D4NP_ERR_OVERFLOW,           /* a size/numeric computation overflowed              */
-    D4NP_ERR_NOT_FOUND,          /* a lookup found no matching element                 */
-    D4NP_ERR_IO,                 /* an underlying I/O operation failed                 */
-    D4NP_ERR_AGAIN,              /* non-blocking operation would block; retry          */
-    D4NP_ERR_UNSUPPORTED,        /* operation not supported on this platform/build     */
-    D4NP_ERR_INTERNAL            /* an invariant was violated (a bug)                  */
+    D4NP_OK = 0,               /* success                                            */
+    D4NP_ERR_INVALID_ARGUMENT, /* a NULL or out-of-range argument was passed         */
+    D4NP_ERR_OUT_OF_MEMORY,    /* an allocator returned no memory                    */
+    D4NP_ERR_OVERFLOW,         /* a size/numeric computation overflowed              */
+    D4NP_ERR_NOT_FOUND,        /* a lookup found no matching element                 */
+    D4NP_ERR_IO,               /* an underlying I/O operation failed                 */
+    D4NP_ERR_AGAIN,            /* non-blocking operation would block; retry          */
+    D4NP_ERR_UNSUPPORTED,      /* operation not supported on this platform/build     */
+    D4NP_ERR_INTERNAL          /* an invariant was violated (a bug)                  */
 } d4np_status_t;
 
 /*
