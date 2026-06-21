@@ -1,0 +1,30 @@
+# d4np-c — archive export rules.
+#
+# `export-ignore` strips a path from `git archive`, which is what GitHub serves as the
+# "Source code (zip/tar.gz)" assets on a release/tag. The result is an implementation-only
+# bundle: the library sources + headers + the CMake needed to build/consume it, with the
+# development scaffolding (agent contracts, docs, tests, benchmarks, tooling, CI) removed.
+#
+# NOTE: this affects archives only. A `git clone` always gets the full tree.
+# Kept in the bundle: d4np/, cmake/, CMakeLists.txt, CMakePresets.json, packaging/,
+#                     LICENSE, README.md, CHANGELOG.md, SECURITY.md.
+
+# --- development scaffolding (not part of the shipped library) ---
+.github/                export-ignore
+docs/                   export-ignore
+tests/                  export-ignore
+bench/                  export-ignore
+tools/                  export-ignore
+
+# --- agent / AI contracts ---
+AGENTS.md               export-ignore
+CLAUDE.md               export-ignore
+GEMINI.md               export-ignore
+
+# --- planning / spec / dev meta files ---
+ROADMAP.md              export-ignore
+spec-d4np-utils-c.md    export-ignore
+.clang-format           export-ignore
+.clang-tidy             export-ignore
+.gitignore              export-ignore
+.gitattributes          export-ignore
