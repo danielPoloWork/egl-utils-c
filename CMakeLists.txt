@@ -33,6 +33,8 @@ find_package(Threads REQUIRED)
 add_library(d4np
     d4np/core/d4np_status.c
     d4np/core/d4np_allocator.c
+    d4np/mem/arena.c
+    d4np/mem/pool.c
     d4np/str/str_view.c)
 add_library(d4np::d4np ALIAS d4np)
 
@@ -63,7 +65,11 @@ if(D4NP_BUILD_TESTS)
     FetchContent_MakeAvailable(unity)
 
     add_executable(d4np_tests
-        tests/str/test_str_view.c)
+        tests/test_main.c
+        tests/str/test_str_view.c
+        tests/mem/test_arena.c
+        tests/mem/test_pool.c)
+    target_include_directories(d4np_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
     target_link_libraries(d4np_tests PRIVATE d4np::d4np unity)
 
     add_test(NAME d4np_tests COMMAND d4np_tests)
@@ -73,6 +79,6 @@ endif()
 # Benchmarks (added per module as they land; gated by D4NP_BUILD_BENCH)
 # ---------------------------------------------------------------------------
 if(D4NP_BUILD_BENCH)
-    # Benchmark targets are added here as the perf-critical modules (mem, ds, concurrency, str)
-    # land. See docs/benchmarks/ for the methodology.
+    add_executable(d4np_bench_mem bench/mem/bench_mem.c)
+    target_link_libraries(d4np_bench_mem PRIVATE d4np::d4np)
 endif()

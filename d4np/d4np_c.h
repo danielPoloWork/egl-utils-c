@@ -22,6 +22,10 @@
 #include "d4np/core/d4np_status.h"
 #include "d4np/core/version.h"
 
+/* Memory & allocators */
+#include "d4np/mem/arena.h"
+#include "d4np/mem/pool.h"
+
 /* Strings & parsing */
 #include "d4np/str/str_view.h"
 

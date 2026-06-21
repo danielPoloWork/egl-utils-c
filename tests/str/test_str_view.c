@@ -1,5 +1,5 @@
 /*
- * d4np-c — unit tests for the foundation + str_view slice (Milestone 1).
+ * d4np-c — tests for the str_view module (#15).
  *
  * SPDX-License-Identifier: MIT
  * Copyright (c) 2026 Daniel Polo
@@ -9,13 +9,6 @@
 #include "d4np_c.h"
 
 #include <string.h>
-
-void setUp(void)
-{
-}
-void tearDown(void)
-{
-}
 
 static void expect_view(d4np_str_view_t v, const char *literal)
 {
@@ -27,8 +20,7 @@ static void expect_view(d4np_str_view_t v, const char *literal)
 
 static void test_from_str_basic(void)
 {
-    d4np_str_view_t sv = d4np_str_view_from_str("hello");
-    expect_view(sv, "hello");
+    expect_view(d4np_str_view_from_str("hello"), "hello");
 }
 
 static void test_from_str_null_is_empty(void)
@@ -48,7 +40,6 @@ static void test_equals(void)
 
 static void test_split_spec_example(void)
 {
-    /* The exact example from the spec (§3). */
     d4np_str_view_t sv = d4np_str_view_from_str("Daniel;Polo;Architect");
     d4np_str_view_t tok;
     const char *expect[] = {"Daniel", "Polo", "Architect"};
@@ -114,9 +105,8 @@ static void test_allocator_default_roundtrip(void)
     TEST_ASSERT_NOT_NULL(p);
     d4np_free(a, p, 256);
 
-    /* NULL allocator falls back to the default; zero size yields NULL. */
     TEST_ASSERT_NULL(d4np_alloc(NULL, 0, 0));
-    d4np_free(NULL, NULL, 0); /* no-op, must not crash */
+    d4np_free(NULL, NULL, 0);
 }
 
 static void test_status_str(void)
@@ -131,9 +121,8 @@ static void test_version_string(void)
     TEST_ASSERT_EQUAL_STRING("0.0.0", D4NP_VERSION_STRING);
 }
 
-int main(void)
+void suite_str(void)
 {
-    UNITY_BEGIN();
     RUN_TEST(test_from_str_basic);
     RUN_TEST(test_from_str_null_is_empty);
     RUN_TEST(test_equals);
@@ -145,5 +134,4 @@ int main(void)
     RUN_TEST(test_allocator_default_roundtrip);
     RUN_TEST(test_status_str);
     RUN_TEST(test_version_string);
-    return UNITY_END();
 }

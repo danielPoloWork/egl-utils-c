@@ -25,7 +25,7 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: Check out the tagged tree
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
 
@@ -41,7 +41,7 @@ jobs:
         run: cmake --build --preset debug
 
       - name: Draft the release (a human publishes it)
-        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2.6.2
+        uses: softprops/action-gh-release@718ea10b132b3b2eba29c1007bb80653f286566b # v3.0.1
         with:
           draft: true
           generate_release_notes: true
