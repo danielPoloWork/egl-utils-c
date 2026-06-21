@@ -22,6 +22,14 @@ endif()
 option(D4NP_BUILD_TESTS "Build the d4np-c unit tests" ON)
 option(D4NP_BUILD_BENCH "Build the d4np-c benchmarks" OFF)
 option(D4NP_ENABLE_COVERAGE "Instrument the library and tests for line coverage (GCC/Clang only)" OFF)
+# Default the install/export rules ON for a top-level build, OFF when d4np-c is pulled in as a
+# subproject (add_subdirectory / FetchContent), so a consumer's `install` stays uncluttered.
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    set(D4NP_INSTALL_DEFAULT ON)
+else()
+    set(D4NP_INSTALL_DEFAULT OFF)
+endif()
+option(D4NP_INSTALL "Generate install and CMake-package export rules for d4np-c" ${D4NP_INSTALL_DEFAULT})
 
 # The concurrency module wraps pthread/win32; pull in the platform threads library now so the
 # public target carries it for consumers.
@@ -62,6 +70,10 @@ target_include_directories(d4np
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/d4np>
         $<INSTALL_INTERFACE:include>)
 
+# The public headers use C11 (atomics, _Alignas); requiring it PUBLIC propagates the standard to
+# downstream find_package consumers (e.g. MSVC needs /std:c11 to parse _Alignas in mutex.h).
+target_compile_features(d4np PUBLIC c_std_11)
+
 target_link_libraries(d4np PUBLIC Threads::Threads)
 
 if(MSVC)
@@ -92,6 +104,52 @@ if(D4NP_ENABLE_COVERAGE)
         # Emit absolute paths in the .gcno/.gcda so gcovr resolves sources from any CWD.
         target_compile_options(d4np PRIVATE -fprofile-abs-path)
     endif()
+endif()
+
+# ---------------------------------------------------------------------------
+# Install & CMake-package export (M8.3) — makes `find_package(d4np-c)` work for
+# downstream consumers (incl. the vcpkg port and Conan recipe under packaging/).
+# See ADR-0005.
+# ---------------------------------------------------------------------------
+if(D4NP_INSTALL)
+    include(GNUInstallDirs)
+    include(CMakePackageConfigHelpers)
+
+    # The compiled library + its usage requirements (the INSTALL_INTERFACE include dir).
+    install(TARGETS d4np
+        EXPORT d4np-cTargets
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+    # Headers: module headers keep their d4np/ prefix (include/d4np/<module>/*.h); the umbrella
+    # header lands at the include root so consumers write `#include "d4np_c.h"`.
+    install(DIRECTORY d4np/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/d4np
+        FILES_MATCHING PATTERN "*.h" PATTERN "d4np_c.h" EXCLUDE)
+    install(FILES d4np/d4np_c.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+    # Exported target file: consumers link `d4np::d4np`.
+    install(EXPORT d4np-cTargets
+        FILE d4np-cTargets.cmake
+        NAMESPACE d4np::
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/d4np-c)
+
+    configure_package_config_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/d4np-cConfig.cmake.in
+        ${CMAKE_CURRENT_BINARY_DIR}/d4np-cConfig.cmake
+        INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/d4np-c)
+
+    write_basic_package_version_file(
+        ${CMAKE_CURRENT_BINARY_DIR}/d4np-cConfigVersion.cmake
+        VERSION ${PROJECT_VERSION}
+        COMPATIBILITY SameMajorVersion)
+
+    install(FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/d4np-cConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/d4np-cConfigVersion.cmake
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/d4np-c)
 endif()
 
 # ---------------------------------------------------------------------------

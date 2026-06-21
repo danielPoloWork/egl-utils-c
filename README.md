@@ -41,6 +41,24 @@ tools/coverage.sh        # build + test instrumented, then gcovr --fail-under-li
 See [`docs/development/local-build.md`](docs/development/local-build.md) for the full local
 setup.
 
+## Install & consume
+
+Install the library and its CMake package, then depend on it with `find_package`:
+
+```bash
+cmake -S . -B build -DD4NP_INSTALL=ON
+cmake --build build
+cmake --install build --prefix /your/prefix
+```
+
+```cmake
+find_package(d4np-c CONFIG REQUIRED)
+target_link_libraries(app PRIVATE d4np::d4np)
+```
+
+A [vcpkg port](packaging/vcpkg/) and a [Conan recipe](packaging/conan/) wrap the same export —
+see [`docs/workflow/packaging.md`](docs/workflow/packaging.md).
+
 ## Quickstart by module group
 
 Include the whole surface with `#include "d4np_c.h"`, or one module via its public header.
