@@ -35,7 +35,7 @@ tools/coverage.sh        # build + test instrumented, then gcovr --fail-under-li
 ```
 
 - **Toolchain:** CMake + Ninja, Unity, clang-format, clang-tidy + cppcheck.
-- **Supported platforms:** Linux x86_64 (GCC>=11, Clang>=14), Windows x86_64 (MSVC>=19.30), macOS arm64 (Apple Clang>=14).
+- **Supported platforms:** Linux x86_64 (GCC>=11, Clang>=14), Windows x86_64 (MSVC>=19.30), macOS arm64 (Apple Clang>=14). Language floor is **C11** — see the [compatibility matrix](docs/development/compatibility.md).
 - Consumers import the public surface via: `#include "d4np_c.h"`.
 
 See [`docs/development/local-build.md`](docs/development/local-build.md) for the full local
