@@ -21,5 +21,10 @@ int main(void)
     suite_str();
     suite_arena();
     suite_pool();
+    suite_vector();
+    suite_string_builder();
+    suite_hashmap();
+    suite_linked_list();
+    suite_ring_buffer();
     return UNITY_END();
 }

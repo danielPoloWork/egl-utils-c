@@ -19,6 +19,13 @@ PR. A release PR moves the `[Unreleased]` entries into a new per-version file un
 - `d4np/str`: non-owning `d4np_str_view_t` with zero-allocation `d4np_str_view_split_next` (#15).
 - `d4np/mem`: arena allocator `d4np_arena_init/alloc/reset/destroy` (#1-#3) and fixed-block
   pool `d4np_pool_init/alloc/free/destroy` (#4-#5), both O(1); benchmarks under `bench/mem`.
+- `d4np/ds`: generic `d4np_vector_t` with geometric growth (#6) and `d4np_string_builder_t`
+  with amortized O(1) appends (#10), both allocator-injected.
+- `d4np/ds`: generic `d4np_hashmap_t` (open addressing + linear probing, pluggable hash/eq,
+  default FNV-1a) (#7) and intrusive `d4np_linked_list_t` with O(1) insert/remove (#8).
+- `d4np/ds`: lock-free SPSC `d4np_ring_buffer_t` over C11 atomics (acquire/release), with a
+  real multi-threaded producer/consumer test run under ThreadSanitizer in CI (#9).
+- `bench/ds`: throughput benchmarks for the vector, hash map, and ring buffer.
 
 ### Changed
 
