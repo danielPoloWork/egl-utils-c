@@ -18,9 +18,9 @@
  * @{
  */
 
-#define D4NP_VERSION_MAJOR 1       /**< major version component */
-#define D4NP_VERSION_MINOR 0       /**< minor version component */
-#define D4NP_VERSION_PATCH 0       /**< patch version component */
+#define D4NP_VERSION_MAJOR 1        /**< major version component */
+#define D4NP_VERSION_MINOR 0        /**< minor version component */
+#define D4NP_VERSION_PATCH 0        /**< patch version component */
 #define D4NP_VERSION_STRING "1.0.0" /**< full version as a string literal */
 
 /** @} */

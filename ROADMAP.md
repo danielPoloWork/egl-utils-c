@@ -79,9 +79,7 @@ The thinnest slice that compiles, tests, and ships under the full quality bar.
 - [x] 8.3 Packaging: vcpkg port + Conan recipe; install/export CMake targets.
 - [x] 8.4 Strict-C11 broad-reach conformance job (`-pedantic-errors`, no extensions) and a documented compatibility matrix. (Reworded from "C99-pedantic": the library depends on C11 atomics/`alignof`/`_Thread_local`, so C99 is infeasible — see ADR-0006.)
 - [x] 8.5 Named/IPC semaphore (`d4np_named_semaphore_t`) with a multi-process test harness; perf thresholds gated in CI.
-- [x] 8.6 Cut `1.0.0` — freeze the public ABI (ADR-0008), write release notes, tag.
-      (Agent-side prep done: version bump, changelog roll, release notes. Opening/merging the
-      release PR, the tag push, and publishing remain the maintainer's per AGENTS.md §11.)
+- [x] 8.6 Cut `1.0.0` — freeze the public ABI (ADR-0008), write release notes, tag. (Agent-side prep done: version bump, changelog roll, release notes. Opening/merging the release PR, the tag push, and publishing remain the maintainer's per AGENTS.md §11.)
 
 ---
 
