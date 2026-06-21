@@ -17,7 +17,7 @@ diagnostics — each allocator-injected, error-checked, and verified under sanit
 library links against nothing but libc and the platform threads library.
 
 The frozen specification is in
-[`docs/specs/01_spec_d4np.md`](docs/specs/01_spec_d4np.md). The full API reference is generated
+[`docs/specs/01_spec_d4np.md`](https://github.com/danielPoloWork/egl-utils-c/blob/master/docs/specs/01_spec_d4np.md). The full API reference is generated
 with Doxygen (`doxygen docs/Doxyfile` → `docs/doxygen/html/`).
 
 ## Build, test, run
@@ -28,17 +28,17 @@ ctest --preset debug --output-on-failure
 ```
 
 Line coverage (GCC/Clang; enforces the ≥80% gate over `d4np/`, see
-[ADR-0003](docs/adr/0003-enforce-line-coverage-gate.md)):
+[ADR-0003](https://github.com/danielPoloWork/egl-utils-c/blob/master/docs/adr/0003-enforce-line-coverage-gate.md)):
 
 ```bash
 tools/coverage.sh        # build + test instrumented, then gcovr --fail-under-line 80
 ```
 
 - **Toolchain:** CMake + Ninja, Unity, clang-format, clang-tidy + cppcheck.
-- **Supported platforms:** Linux x86_64 (GCC>=11, Clang>=14), Windows x86_64 (MSVC>=19.30), macOS arm64 (Apple Clang>=14). Language floor is **C11** — see the [compatibility matrix](docs/development/compatibility.md).
+- **Supported platforms:** Linux x86_64 (GCC>=11, Clang>=14), Windows x86_64 (MSVC>=19.30), macOS arm64 (Apple Clang>=14). Language floor is **C11** — see the [compatibility matrix](https://github.com/danielPoloWork/egl-utils-c/blob/master/docs/development/compatibility.md).
 - Consumers import the public surface via: `#include "d4np_c.h"`.
 
-See [`docs/development/local-build.md`](docs/development/local-build.md) for the full local
+See [`docs/development/local-build.md`](https://github.com/danielPoloWork/egl-utils-c/blob/master/docs/development/local-build.md) for the full local
 setup.
 
 ## Install & consume
@@ -77,7 +77,7 @@ automatically — but it documents intent and avoids fetching the test framework
 same `find_package(d4np-c CONFIG REQUIRED)` shown above.
 
 A [vcpkg port](packaging/vcpkg/) and a [Conan recipe](packaging/conan/) wrap the same export —
-see [`docs/workflow/packaging.md`](docs/workflow/packaging.md).
+see [`docs/workflow/packaging.md`](https://github.com/danielPoloWork/egl-utils-c/blob/master/docs/workflow/packaging.md).
 
 ## Quickstart by module group
 
@@ -165,11 +165,11 @@ d4np_uuid_format(&id, text);
 
 | Document | Purpose |
 |---|---|
-| [`AGENTS.md`](AGENTS.md) | How AI agents (and humans) work in this repo — the contract. |
-| [`ROADMAP.md`](ROADMAP.md) | The numbered plan and what is done. |
-| [`docs/adr/`](docs/adr/) | Why it is built the way it is (Architecture Decision Records). |
-| [`docs/patterns/`](docs/patterns/) | Design patterns adopted, rejected, or considered. |
-| [`docs/workflow/`](docs/workflow/) | Git, documentation, release, and maintenance conventions. |
+| [`AGENTS.md`](https://github.com/danielPoloWork/egl-utils-c/blob/master/AGENTS.md) | How AI agents (and humans) work in this repo — the contract. |
+| [`ROADMAP.md`](https://github.com/danielPoloWork/egl-utils-c/blob/master/ROADMAP.md) | The numbered plan and what is done. |
+| [`docs/adr/`](https://github.com/danielPoloWork/egl-utils-c/tree/master/docs/adr) | Why it is built the way it is (Architecture Decision Records). |
+| [`docs/patterns/`](https://github.com/danielPoloWork/egl-utils-c/tree/master/docs/patterns) | Design patterns adopted, rejected, or considered. |
+| [`docs/workflow/`](https://github.com/danielPoloWork/egl-utils-c/tree/master/docs/workflow) | Git, documentation, release, and maintenance conventions. |
 | [`CHANGELOG.md`](CHANGELOG.md) | User-visible changes per release. |
 | [`SECURITY.md`](SECURITY.md) | How to report a vulnerability. |
 
