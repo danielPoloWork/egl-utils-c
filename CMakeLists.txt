@@ -165,8 +165,10 @@ endif()
 
 # ---------------------------------------------------------------------------
 # Tests (Unity, fetched only when D4NP_BUILD_TESTS is ON)
+# The EXISTS guard lets the implementation-only source archive (tests/ stripped via
+# .gitattributes export-ignore) still configure and build the library with default options.
 # ---------------------------------------------------------------------------
-if(D4NP_BUILD_TESTS)
+if(D4NP_BUILD_TESTS AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests")
     enable_testing()
     include(FetchContent)
     FetchContent_Declare(unity
@@ -216,8 +218,9 @@ endif()
 
 # ---------------------------------------------------------------------------
 # Benchmarks (added per module as they land; gated by D4NP_BUILD_BENCH)
+# EXISTS guard: see the tests block above — bench/ is stripped from the implementation archive.
 # ---------------------------------------------------------------------------
-if(D4NP_BUILD_BENCH)
+if(D4NP_BUILD_BENCH AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/bench")
     add_executable(d4np_bench_mem bench/mem/bench_mem.c)
     target_link_libraries(d4np_bench_mem PRIVATE d4np::d4np)
 
