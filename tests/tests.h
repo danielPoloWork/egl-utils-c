@@ -12,6 +12,7 @@
 #define D4NP_TESTS_H
 
 void suite_str(void);
+void suite_parse(void);
 void suite_arena(void);
 void suite_pool(void);
 void suite_vector(void);

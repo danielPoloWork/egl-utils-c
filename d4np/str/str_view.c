@@ -60,3 +60,16 @@ bool d4np_str_view_split_next(d4np_str_view_t *sv, char sep, d4np_str_view_t *ou
     sv->len = 0;
     return true;
 }
+
+size_t d4np_str_split(d4np_str_view_t sv, char sep, d4np_str_view_t *out, size_t max_out)
+{
+    size_t count = 0;
+    d4np_str_view_t token;
+    while (d4np_str_view_split_next(&sv, sep, &token)) {
+        if (out != NULL && count < max_out) {
+            out[count] = token;
+        }
+        ++count;
+    }
+    return count;
+}
