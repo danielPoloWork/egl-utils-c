@@ -6,7 +6,7 @@
 # development scaffolding (agent contracts, docs, tests, benchmarks, tooling, CI) removed.
 #
 # NOTE: this affects archives only. A `git clone` always gets the full tree.
-# Kept in the bundle: d4np/, cmake/, CMakeLists.txt, CMakePresets.json, packaging/,
+# Kept in the bundle: d4np/, cmake/, CMakeLists.txt, CMakePresets.json,
 #                     LICENSE, README.md, CHANGELOG.md, SECURITY.md.
 
 # --- development scaffolding (not part of the shipped library) ---
@@ -15,6 +15,10 @@ docs/                   export-ignore
 tests/                  export-ignore
 bench/                  export-ignore
 tools/                  export-ignore
+# packaging/ (vcpkg port + Conan recipe) is distribution metadata for maintainers, not part of
+# the library a bundle consumer builds. It is also kept out so the vcpkg portfile's SHA512 — which
+# pins this very archive — is not part of the archive it checksums (that would be circular).
+packaging/              export-ignore
 
 # --- agent / AI contracts ---
 AGENTS.md               export-ignore
