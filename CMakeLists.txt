@@ -47,7 +47,12 @@ add_library(d4np
     d4np/str/str_view.c
     d4np/str/parse.c
     d4np/io/file.c
-    d4np/io/path.c)
+    d4np/io/path.c
+    d4np/sys/hash.c
+    d4np/sys/clock.c
+    d4np/sys/uuid.c
+    d4np/sys/error_context.c
+    d4np/sys/log.c)
 add_library(d4np::d4np ALIAS d4np)
 
 target_include_directories(d4np
@@ -98,7 +103,12 @@ if(D4NP_BUILD_TESTS)
         tests/concurrency/test_atomic_queue.c
         tests/concurrency/test_thread_pool.c
         tests/io/test_file.c
-        tests/io/test_path.c)
+        tests/io/test_path.c
+        tests/sys/test_hash.c
+        tests/sys/test_clock.c
+        tests/sys/test_uuid.c
+        tests/sys/test_error_context.c
+        tests/sys/test_log.c)
     target_include_directories(d4np_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
     target_link_libraries(d4np_tests PRIVATE d4np::d4np unity)
 

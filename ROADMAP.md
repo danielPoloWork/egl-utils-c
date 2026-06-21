@@ -64,13 +64,13 @@ The thinnest slice that compiles, tests, and ships under the full quality bar.
 - [x] 6.2 `d4np_file_write_all` (#19) — atomic write (temp + fsync + rename).
 - [x] 6.3 `d4np_path_combine` (#20) — OS-separator-aware safe path join.
 
-## Milestone 7 — System utilities & diagnostics (`d4np/sys`)
+## Milestone 7 — System utilities & diagnostics (`d4np/sys`) ✅
 
-- [ ] 7.1 `d4np_error_context_push` / `d4np_error_context_pop` (#22) — thread-local error trail.
-- [ ] 7.2 `d4np_log_write` (#21) — leveled logger (INFO/WARN/ERROR) to console or file.
-- [ ] 7.3 `d4np_timestamp_ms` (#23) — monotonic millisecond clock.
-- [ ] 7.4 `d4np_uuid_generate` (#24) — RFC4122 v4 UUID.
-- [ ] 7.5 `d4np_hash_fnv1a` (#25) — FNV-1a over strings and binary buffers.
+- [x] 7.1 `d4np_error_context_push` / `d4np_error_context_pop` (#22) — thread-local error trail.
+- [x] 7.2 `d4np_log_write` (#21) — leveled logger (INFO/WARN/ERROR) to console or file.
+- [x] 7.3 `d4np_timestamp_ms` (#23) — monotonic millisecond clock (+ ns).
+- [x] 7.4 `d4np_uuid_generate` (#24) — RFC4122 v4 UUID (+ canonical formatting).
+- [x] 7.5 `d4np_hash_fnv1a` (#25) — FNV-1a over strings and binary buffers (+ continuation).
 
 ## Milestone 8 — Hardening & 1.0 release
 

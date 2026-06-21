@@ -43,6 +43,12 @@ PR. A release PR moves the `[Unreleased]` entries into a new per-version file un
 - `d4np/io`: `d4np_file_read_all` (chunked, allocator-backed) (#18); `d4np_file_write_all`
   (durable atomic write via temp file + fsync + rename) (#19); `d4np_path_combine`
   (separator-aware, snprintf-style truncation reporting) (#20).
+- `d4np/sys`: `d4np_hash_fnv1a` (+ str/continuation forms) (#25); `d4np_timestamp_ms`/`_ns`
+  (monotonic) (#23); `d4np_uuid_generate` + `d4np_uuid_format` (RFC4122 v4, fast per-thread
+  PRNG — not cryptographic) (#24).
+- `d4np/sys`: thread-local `d4np_error_context_push`/`pop`/`clear`/`depth` for an error trail
+  (#22); thread-safe leveled `d4np_log_write` with timestamped records and a configurable
+  sink/min-level (#21). With this, all 25 spec functions are implemented.
 
 ### Changed
 

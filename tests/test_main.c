@@ -33,5 +33,10 @@ int main(void)
     suite_thread_pool();
     suite_file();
     suite_path();
+    suite_hash();
+    suite_clock();
+    suite_uuid();
+    suite_error_context();
+    suite_log();
     return UNITY_END();
 }

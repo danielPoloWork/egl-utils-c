@@ -25,7 +25,7 @@ static uint64_t default_hash(const void *key, size_t key_size)
 {
     /* FNV-1a (64-bit). A public d4np_hash_fnv1a lands in the sys module (#25). */
     const unsigned char *p = (const unsigned char *)key;
-    uint64_t h = 1469598103934665603ULL; /* offset basis */
+    uint64_t h = 14695981039346656037ULL; /* FNV-1a 64-bit offset basis */
     for (size_t i = 0; i < key_size; ++i) {
         h ^= (uint64_t)p[i];
         h *= 1099511628211ULL; /* prime */
