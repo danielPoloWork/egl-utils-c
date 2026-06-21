@@ -40,6 +40,9 @@ PR. A release PR moves the `[Unreleased]` entries into a new per-version file un
 - `d4np/str`: `d4np_str_split` — zero-allocation split into a caller-provided view array,
   returning the true field count (#16); `d4np_str_parse_int` (any base 2..36 or auto, overflow-
   safe, full int64 range) and `d4np_str_parse_float` (#17), both returning `d4np_status_t`.
+- `d4np/io`: `d4np_file_read_all` (chunked, allocator-backed) (#18); `d4np_file_write_all`
+  (durable atomic write via temp file + fsync + rename) (#19); `d4np_path_combine`
+  (separator-aware, snprintf-style truncation reporting) (#20).
 
 ### Changed
 
