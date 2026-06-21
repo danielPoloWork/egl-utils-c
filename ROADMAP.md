@@ -47,7 +47,7 @@ The thinnest slice that compiles, tests, and ships under the full quality bar.
 ## Milestone 4 — Concurrency & synchronization (`d4np/concurrency`) ✅
 
 - [x] 4.1 `d4np_mutex_t` (#11) — portable shim over pthread/win32.
-- [x] 4.2 `d4np_semaphore_t` (#14) — counting semaphore (in-process; named/IPC variant in M8.5).
+- [x] 4.2 `d4np_semaphore_t` (#14) — counting semaphore (in-process; named/IPC variant added in M8.5).
 - [x] 4.3 `d4np_atomic_queue_t` (#13) — lock-free SPSC over `<stdatomic.h>` (unbounded, node-based).
 - [x] 4.4 `d4np_thread_pool_t` (#12) — native threads + internal task queue (graceful drain on shutdown).
 - [x] 4.5 Stress tests + benchmarks under `bench/concurrency`; whole module green under TSan (mutex ~15 ns, atomic_queue enq+deq ~57 ns, pool dispatch ~0.5 M tasks/s).
@@ -80,7 +80,8 @@ The thinnest slice that compiles, tests, and ships under the full quality bar.
 - [x] 8.4 Strict-C11 broad-reach conformance job (`-pedantic-errors`, no extensions) and a
       documented compatibility matrix. (Reworded from "C99-pedantic": the library depends on C11
       atomics/`alignof`/`_Thread_local`, so C99 is infeasible — see ADR-0006.)
-- [ ] 8.5 Multi-process test harness for `d4np_semaphore_t` IPC; perf thresholds gated in CI.
+- [x] 8.5 Named/IPC semaphore (`d4np_named_semaphore_t`) with a multi-process test harness; perf
+      thresholds gated in CI.
 - [ ] 8.6 Cut `1.0.0` — freeze the public ABI, write release notes, tag.
 
 ---

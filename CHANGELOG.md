@@ -63,6 +63,11 @@ PR. A release PR moves the `[Unreleased]` entries into a new per-version file un
   C11 (`-pedantic-errors`, no extensions), gated across GCC/Clang/Apple Clang by a CI `pedantic`
   job; `docs/development/compatibility.md` documents the C11 floor and the compiler/platform
   matrix (ADR-0006).
+- `d4np/concurrency`: named, cross-process `d4np_named_semaphore_t` (#14) over POSIX `sem_open` /
+  Windows named `CreateSemaphore` — `open`/`close`/`unlink`/`wait`/`trywait`/`post`. Verified by a
+  multi-process ping-pong harness (`d4np_named_sem_ipc` CTest) plus in-process unit tests.
+- Bench/CI: `bench/concurrency/perf_gate.c` asserts loose hot-path ceilings (mutex, semaphore,
+  atomic queue) and is run by the CI benchmark job, turning the perf claims into a gate (ADR-0007).
 
 ### Changed
 

@@ -52,6 +52,7 @@ add_library(d4np
     d4np/ds/ring_buffer.c
     d4np/concurrency/mutex.c
     d4np/concurrency/semaphore.c
+    d4np/concurrency/named_semaphore.c
     d4np/concurrency/atomic_queue.c
     d4np/concurrency/thread_pool.c
     d4np/str/str_view.c
@@ -189,6 +190,7 @@ if(D4NP_BUILD_TESTS)
         tests/ds/test_ring_buffer.c
         tests/concurrency/test_mutex.c
         tests/concurrency/test_semaphore.c
+        tests/concurrency/test_named_semaphore.c
         tests/concurrency/test_atomic_queue.c
         tests/concurrency/test_thread_pool.c
         tests/io/test_file.c
@@ -202,6 +204,14 @@ if(D4NP_BUILD_TESTS)
     target_link_libraries(d4np_tests PRIVATE d4np::d4np unity)
 
     add_test(NAME d4np_tests COMMAND d4np_tests)
+
+    # Multi-process IPC verification for the named semaphore (M8.5): a standalone binary that
+    # re-launches itself and ping-pongs across two processes. TIMEOUT guards against a hang if
+    # cross-process signaling is broken. See ADR-0007.
+    add_executable(d4np_named_sem_harness tests/concurrency/named_sem_harness.c)
+    target_link_libraries(d4np_named_sem_harness PRIVATE d4np::d4np)
+    add_test(NAME d4np_named_sem_ipc COMMAND d4np_named_sem_harness)
+    set_tests_properties(d4np_named_sem_ipc PROPERTIES TIMEOUT 60)
 endif()
 
 # ---------------------------------------------------------------------------
@@ -216,4 +226,9 @@ if(D4NP_BUILD_BENCH)
 
     add_executable(d4np_bench_concurrency bench/concurrency/bench_concurrency.c)
     target_link_libraries(d4np_bench_concurrency PRIVATE d4np::d4np)
+
+    # Performance gate (M8.5): asserts loose ceilings on hot-path cost and exits non-zero on a
+    # catastrophic regression. Run by the CI benchmark job. See ADR-0007.
+    add_executable(d4np_perf_gate bench/concurrency/perf_gate.c)
+    target_link_libraries(d4np_perf_gate PRIVATE d4np::d4np)
 endif()

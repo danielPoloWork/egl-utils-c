@@ -10,8 +10,8 @@
  * semaphores are unavailable). The native state lives in opaque, aligned storage so this
  * header needs no platform includes (spec \#14).
  *
- * Scope: this is an in-process counting semaphore for thread synchronization. The named,
- * cross-process (IPC) variant and its multi-process verification are tracked in Milestone 8.
+ * Scope: this is an in-process counting semaphore for thread synchronization. For the named,
+ * cross-process (IPC) variant see ::d4np_named_semaphore_t (named_semaphore.h).
  *
  * @ingroup d4np_concurrency
  */
