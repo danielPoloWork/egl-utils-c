@@ -40,6 +40,10 @@ add_library(d4np
     d4np/ds/hashmap.c
     d4np/ds/linked_list.c
     d4np/ds/ring_buffer.c
+    d4np/concurrency/mutex.c
+    d4np/concurrency/semaphore.c
+    d4np/concurrency/atomic_queue.c
+    d4np/concurrency/thread_pool.c
     d4np/str/str_view.c)
 add_library(d4np::d4np ALIAS d4np)
 
@@ -81,7 +85,11 @@ if(D4NP_BUILD_TESTS)
         tests/ds/test_string_builder.c
         tests/ds/test_hashmap.c
         tests/ds/test_linked_list.c
-        tests/ds/test_ring_buffer.c)
+        tests/ds/test_ring_buffer.c
+        tests/concurrency/test_mutex.c
+        tests/concurrency/test_semaphore.c
+        tests/concurrency/test_atomic_queue.c
+        tests/concurrency/test_thread_pool.c)
     target_include_directories(d4np_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests)
     target_link_libraries(d4np_tests PRIVATE d4np::d4np unity)
 
@@ -97,4 +105,7 @@ if(D4NP_BUILD_BENCH)
 
     add_executable(d4np_bench_ds bench/ds/bench_ds.c)
     target_link_libraries(d4np_bench_ds PRIVATE d4np::d4np)
+
+    add_executable(d4np_bench_concurrency bench/concurrency/bench_concurrency.c)
+    target_link_libraries(d4np_bench_concurrency PRIVATE d4np::d4np)
 endif()

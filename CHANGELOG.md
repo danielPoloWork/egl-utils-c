@@ -26,6 +26,17 @@ PR. A release PR moves the `[Unreleased]` entries into a new per-version file un
 - `d4np/ds`: lock-free SPSC `d4np_ring_buffer_t` over C11 atomics (acquire/release), with a
   real multi-threaded producer/consumer test run under ThreadSanitizer in CI (#9).
 - `bench/ds`: throughput benchmarks for the vector, hash map, and ring buffer.
+- `d4np/concurrency`: portable `d4np_mutex_t` over CRITICAL_SECTION/pthread_mutex_t (#11) and a
+  counting `d4np_semaphore_t` (Win32 semaphore / POSIX mutex+cond, in-process) (#14); both use
+  opaque storage so the public headers need no platform includes. Multi-threaded tests added.
+- `d4np/concurrency`: lock-free unbounded SPSC `d4np_atomic_queue_t` (Vyukov dummy-node linked
+  queue over C11 atomics) (#13); grows on demand, complements the bounded ring buffer. Real
+  multi-threaded producer/consumer test (run under ThreadSanitizer in CI).
+- `d4np/concurrency`: `d4np_thread_pool_t` — native worker threads draining a mutex-guarded FIFO
+  task queue signalled by a semaphore; graceful shutdown runs every queued task before joining
+  (#12). Multi-threaded test submits 50k tasks across 4 workers.
+- `bench/concurrency`: throughput benchmarks (mutex, atomic queue, thread-pool dispatch) using a
+  monotonic wall clock.
 
 ### Changed
 

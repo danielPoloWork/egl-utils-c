@@ -26,5 +26,9 @@ int main(void)
     suite_hashmap();
     suite_linked_list();
     suite_ring_buffer();
+    suite_mutex();
+    suite_semaphore();
+    suite_atomic_queue();
+    suite_thread_pool();
     return UNITY_END();
 }

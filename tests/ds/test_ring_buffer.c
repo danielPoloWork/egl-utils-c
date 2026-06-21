@@ -11,65 +11,7 @@
 #include "unity.h"
 
 #include "d4np_c.h"
-
-/* ---- minimal portable thread shim (test-only) -------------------------- */
-#ifdef _WIN32
-#include <windows.h>
-typedef HANDLE test_thread_t;
-#else
-#include <pthread.h>
-#include <sched.h>
-typedef pthread_t test_thread_t;
-#endif
-
-typedef void (*test_thread_fn)(void *);
-typedef struct {
-    test_thread_fn fn;
-    void *arg;
-} test_thread_pack;
-
-#ifdef _WIN32
-static DWORD WINAPI test_thread_trampoline(LPVOID p)
-{
-    test_thread_pack *tp = (test_thread_pack *)p;
-    tp->fn(tp->arg);
-    return 0;
-}
-static test_thread_t test_thread_spawn(test_thread_pack *tp)
-{
-    return CreateThread(NULL, 0, test_thread_trampoline, tp, 0, NULL);
-}
-static void test_thread_join(test_thread_t t)
-{
-    WaitForSingleObject(t, INFINITE);
-    CloseHandle(t);
-}
-static void test_thread_yield(void)
-{
-    SwitchToThread();
-}
-#else
-static void *test_thread_trampoline(void *p)
-{
-    test_thread_pack *tp = (test_thread_pack *)p;
-    tp->fn(tp->arg);
-    return NULL;
-}
-static test_thread_t test_thread_spawn(test_thread_pack *tp)
-{
-    test_thread_t t;
-    pthread_create(&t, NULL, test_thread_trampoline, tp);
-    return t;
-}
-static void test_thread_join(test_thread_t t)
-{
-    pthread_join(t, NULL);
-}
-static void test_thread_yield(void)
-{
-    sched_yield();
-}
-#endif
+#include "test_threads.h"
 
 /* ---- single-threaded correctness --------------------------------------- */
 
