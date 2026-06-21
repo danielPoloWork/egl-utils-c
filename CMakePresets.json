@@ -56,6 +56,17 @@
       }
     },
     {
+      "name": "coverage",
+      "displayName": "Coverage (line gate, GCC/Clang only)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/coverage",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "D4NP_BUILD_TESTS": "ON",
+        "D4NP_ENABLE_COVERAGE": "ON"
+      }
+    },
+    {
       "name": "bench",
       "displayName": "Benchmarks (optimized)",
       "generator": "Ninja",
@@ -73,6 +84,7 @@
     { "name": "asan", "configurePreset": "asan" },
     { "name": "ubsan", "configurePreset": "ubsan" },
     { "name": "tsan", "configurePreset": "tsan" },
+    { "name": "coverage", "configurePreset": "coverage" },
     { "name": "bench", "configurePreset": "bench" }
   ],
   "testPresets": [
@@ -80,6 +92,7 @@
     { "name": "release", "configurePreset": "release", "output": { "outputOnFailure": true } },
     { "name": "asan", "configurePreset": "asan", "output": { "outputOnFailure": true } },
     { "name": "ubsan", "configurePreset": "ubsan", "output": { "outputOnFailure": true } },
-    { "name": "tsan", "configurePreset": "tsan", "output": { "outputOnFailure": true } }
+    { "name": "tsan", "configurePreset": "tsan", "output": { "outputOnFailure": true } },
+    { "name": "coverage", "configurePreset": "coverage", "output": { "outputOnFailure": true } }
   ]
 }

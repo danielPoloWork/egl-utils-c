@@ -146,3 +146,26 @@ jobs:
       - name: Build + test under ThreadSanitizer
         run: cmake --preset tsan && cmake --build --preset tsan && ctest --preset tsan --output-on-failure
 
+  # Line-coverage gate (M8.1) — fails the build below 80% over d4np/. See ADR-0003.
+  coverage:
+    name: coverage / line gate >=80%
+    runs-on: ubuntu-24.04
+    env: { CC: gcc }
+    steps:
+      - uses: actions/checkout@v6
+      - uses: lukka/get-cmake@e0566b3900d662ef5b1dc36fb560c4d2b1b6d6bd # v4.3.3
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.12'
+      - name: Install gcovr
+        run: python -m pip install --upgrade gcovr
+      - name: Build, test, and enforce the coverage gate
+        run: tools/coverage.sh 80
+      - name: Upload the HTML coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html
+          path: coverage/html
+          if-no-files-found: ignore
+

@@ -29,6 +29,10 @@ clang-tidy --warnings-as-errors='*' <changed .c/.h>
 # Benchmark
 cmake --build --preset bench
 
+# Line coverage (GCC/Clang) — builds + tests instrumented, enforces the >=80% gate over d4np/
+tools/coverage.sh            # optionally: tools/coverage.sh <threshold>
+#   Clang: GCOV="llvm-cov gcov" tools/coverage.sh
+
 # Cross-artifact congruence (run before drafting any PR)
 python tools/consistency_lint.py
 ```
