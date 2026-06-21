@@ -18,6 +18,7 @@
 typedef HANDLE test_thread_t;
 #else
 #include <pthread.h>
+#include <sched.h>
 typedef pthread_t test_thread_t;
 #endif
 
@@ -43,6 +44,10 @@ static void test_thread_join(test_thread_t t)
     WaitForSingleObject(t, INFINITE);
     CloseHandle(t);
 }
+static void test_thread_yield(void)
+{
+    SwitchToThread();
+}
 #else
 static void *test_thread_trampoline(void *p)
 {
@@ -59,6 +64,10 @@ static test_thread_t test_thread_spawn(test_thread_pack *tp)
 static void test_thread_join(test_thread_t t)
 {
     pthread_join(t, NULL);
+}
+static void test_thread_yield(void)
+{
+    sched_yield();
 }
 #endif
 
@@ -129,7 +138,7 @@ static void producer_run(void *arg)
     d4np_ring_buffer_t *rb = (d4np_ring_buffer_t *)arg;
     for (int i = 0; i < SPSC_COUNT; ++i) {
         while (!d4np_ring_buffer_push(rb, &i)) {
-            /* spin until the consumer frees a slot */
+            test_thread_yield(); /* yield so the consumer can drain (and Valgrind can switch) */
         }
     }
 }
@@ -149,6 +158,8 @@ static void test_spsc_producer_consumer(void)
         if (d4np_ring_buffer_pop(&rb, &out)) {
             TEST_ASSERT_EQUAL_INT(expected, out);
             ++expected;
+        } else {
+            test_thread_yield(); /* nothing yet — yield so the producer can publish */
         }
     }
     test_thread_join(producer);
