@@ -31,14 +31,10 @@ jobs:
 
       - name: Install a recent CMake and Ninja
         uses: lukka/get-cmake@591817e96fcad43505fb4eae36172462abb3a42e # v4.3.3
-      - name: Set up MSVC environment
-        if: matrix.toolchain == 'msvc'
-        uses: ilammy/msvc-dev-cmd@v1
-        with: { arch: x64 }
 
       - name: Build (verify the tag builds clean)
         shell: bash
-        run: cmake --build --preset debug
+        run: cmake --preset debug && cmake --build --preset debug
 
       - name: Draft the release (a human publishes it)
         uses: softprops/action-gh-release@718ea10b132b3b2eba29c1007bb80653f286566b # v3.0.1
