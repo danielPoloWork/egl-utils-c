@@ -56,6 +56,26 @@ find_package(d4np-c CONFIG REQUIRED)
 target_link_libraries(app PRIVATE d4np::d4np)
 ```
 
+### From a release bundle
+
+The **Source code** archive attached to each [release](https://github.com/danielPoloWork/egl-utils-c/releases)
+is an *implementation-only* bundle: just the library sources, headers, CMake, and packaging files —
+the tests, benchmarks, docs, and tooling are stripped out (see `.gitattributes`). Download, build,
+and install it directly:
+
+```bash
+curl -fsSL https://github.com/danielPoloWork/egl-utils-c/archive/refs/tags/v1.0.0.tar.gz | tar -xz
+cd egl-utils-c-1.0.0
+
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DD4NP_BUILD_TESTS=OFF -DD4NP_INSTALL=ON
+cmake --build build
+cmake --install build --prefix /your/prefix
+```
+
+`-DD4NP_BUILD_TESTS=OFF` is optional — the bundle ships no `tests/`, so the test target is skipped
+automatically — but it documents intent and avoids fetching the test framework. Consume it with the
+same `find_package(d4np-c CONFIG REQUIRED)` shown above.
+
 A [vcpkg port](packaging/vcpkg/) and a [Conan recipe](packaging/conan/) wrap the same export —
 see [`docs/workflow/packaging.md`](docs/workflow/packaging.md).
 
