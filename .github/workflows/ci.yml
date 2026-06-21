@@ -169,3 +169,21 @@ jobs:
           path: coverage/html
           if-no-files-found: ignore
 
+  # API documentation gate (M8.2) — Doxygen must build with zero warnings. See ADR-0004.
+  docs:
+    name: docs / doxygen warnings-as-errors
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install Doxygen + Graphviz
+        run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
+      - name: Build the API docs (WARN_AS_ERROR fails on any warning)
+        run: doxygen docs/Doxyfile
+      - name: Upload the HTML API docs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-docs
+          path: docs/doxygen/html
+          if-no-files-found: ignore
+

@@ -19,3 +19,4 @@ Status transitions: `Proposed` → `Accepted` → (`Superseded by ADR-XXXX` | `D
 | [0001](0001-record-architecture-decisions.md) | Record architecture decisions | Accepted |
 | [0002](0002-adopt-module-oriented-source-layout.md) | Adopt a module-oriented source layout | Accepted |
 | [0003](0003-enforce-line-coverage-gate.md) | Enforce an 80% line-coverage gate via gcovr in CI | Accepted |
+| [0004](0004-generate-api-docs-with-doxygen.md) | Generate the API reference with Doxygen, gated warning-free in CI | Accepted |
