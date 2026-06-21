@@ -118,7 +118,7 @@ static void test_status_str(void)
 
 static void test_version_string(void)
 {
-    TEST_ASSERT_EQUAL_STRING("0.0.0", D4NP_VERSION_STRING);
+    TEST_ASSERT_EQUAL_STRING("1.0.0", D4NP_VERSION_STRING);
 }
 
 static void test_split_into_array(void)

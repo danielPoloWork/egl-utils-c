@@ -72,17 +72,16 @@ The thinnest slice that compiles, tests, and ships under the full quality bar.
 - [x] 7.4 `d4np_uuid_generate` (#24) — RFC4122 v4 UUID (+ canonical formatting).
 - [x] 7.5 `d4np_hash_fnv1a` (#25) — FNV-1a over strings and binary buffers (+ continuation).
 
-## Milestone 8 — Hardening & 1.0 release
+## Milestone 8 — Hardening & 1.0 release ✅
 
 - [x] 8.1 Coverage gate ≥80% line across all modules (llvm-cov/gcovr) enforced in CI.
 - [x] 8.2 Doxygen API docs published; README quickstart per module group.
 - [x] 8.3 Packaging: vcpkg port + Conan recipe; install/export CMake targets.
-- [x] 8.4 Strict-C11 broad-reach conformance job (`-pedantic-errors`, no extensions) and a
-      documented compatibility matrix. (Reworded from "C99-pedantic": the library depends on C11
-      atomics/`alignof`/`_Thread_local`, so C99 is infeasible — see ADR-0006.)
-- [x] 8.5 Named/IPC semaphore (`d4np_named_semaphore_t`) with a multi-process test harness; perf
-      thresholds gated in CI.
-- [ ] 8.6 Cut `1.0.0` — freeze the public ABI, write release notes, tag.
+- [x] 8.4 Strict-C11 broad-reach conformance job (`-pedantic-errors`, no extensions) and a documented compatibility matrix. (Reworded from "C99-pedantic": the library depends on C11 atomics/`alignof`/`_Thread_local`, so C99 is infeasible — see ADR-0006.)
+- [x] 8.5 Named/IPC semaphore (`d4np_named_semaphore_t`) with a multi-process test harness; perf thresholds gated in CI.
+- [x] 8.6 Cut `1.0.0` — freeze the public ABI (ADR-0008), write release notes, tag.
+      (Agent-side prep done: version bump, changelog roll, release notes. Opening/merging the
+      release PR, the tag push, and publishing remain the maintainer's per AGENTS.md §11.)
 
 ---
 
@@ -95,12 +94,13 @@ progress · ✅ done · ❎ N/A.
 | Spec § | Requirement | Milestones | Status |
 |--------|-------------|------------|--------|
 | §1 | Objective & business context | M1 | ✅ |
-| §2 | Functional requirements (25 functions) | M1–M7 | 🚧 |
-| §3 | Non-functional requirements (perf, no-leak, thread-safety) | M2, M4, M8 | 🚧 |
+| §2 | Functional requirements (25 functions) | M1–M7 | ✅ |
+| §3 | Non-functional requirements (perf, no-leak, thread-safety) | M2, M4, M8 | ✅ |
 | §4 | Logical architecture | M1 | ✅ |
-| §5 | Public interface | M1–M7 | 🚧 |
-| §6 | Verification & test strategy | M1, M4, M8 | 🚧 |
+| §5 | Public interface | M1–M7 | ✅ |
+| §6 | Verification & test strategy | M1, M4, M8 | ✅ |
 
-> **Status:** Milestone 1 complete — foundation (`d4np/core`) + the `d4np/str` string-view
-> slice build and test green (MSVC verified locally; full Tier-1 matrix runs in CI). The
-> remaining 23 spec functions land across M2–M7, with M8 hardening to 1.0.
+> **Status:** All milestones complete — every spec section is fulfilled and all 25 functions
+> ship across the seven modules under the full quality bar. The agent-side `1.0.0` release
+> preparation (M8.6) is done; opening/merging the release PR, pushing the tag, and publishing the
+> GitHub Release remain the maintainer's per AGENTS.md §11.

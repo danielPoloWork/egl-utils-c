@@ -23,3 +23,4 @@ Status transitions: `Proposed` → `Accepted` → (`Superseded by ADR-XXXX` | `D
 | [0005](0005-package-via-cmake-export-vcpkg-and-conan.md) | Distribute via CMake install/export, a vcpkg port, and a Conan recipe | Accepted |
 | [0006](0006-require-c11-language-floor.md) | Require C11 as the language floor; verify with a broad-reach pedantic build | Accepted |
 | [0007](0007-named-ipc-semaphore-and-perf-gate.md) | Add a named/IPC semaphore and a loose-threshold performance gate | Accepted |
+| [0008](0008-freeze-public-abi-for-1x.md) | Freeze the public API/ABI for the 1.x line | Accepted |
