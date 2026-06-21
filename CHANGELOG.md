@@ -55,6 +55,10 @@ PR. A release PR moves the `[Unreleased]` entries into a new per-version file un
 - Docs: the full public surface is now documented with Doxygen comments and grouped by module;
   a `docs/Doxyfile` + `docs/api/mainpage.md` generate the API reference, gated warning-free by a
   CI `docs` job (ADR-0004). README gains a per-module-group quickstart.
+- Packaging: CMake install/export rules behind a `D4NP_INSTALL` option make `find_package(d4np-c)`
+  → `d4np::d4np` work for downstreams; a vcpkg port (`packaging/vcpkg/`) and a Conan 2.x recipe
+  (`packaging/conan/`) wrap the same export. A cross-platform CI `install` job verifies a
+  `find_package` consumer against a real install prefix (ADR-0005).
 
 ### Changed
 

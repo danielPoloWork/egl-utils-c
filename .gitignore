@@ -3,6 +3,10 @@
 /dist/
 /out/
 /target/
+/_prefix/
+/_install/
+# CMake/Conan local consumer scratch
+CMakeUserPresets.json
 *.o
 *.obj
 *.exe

@@ -1,0 +1,17 @@
+@PACKAGE_INIT@
+
+# d4np-c CMake package config. Consume with:
+#
+#     find_package(d4np-c CONFIG REQUIRED)
+#     target_link_libraries(<your-target> PRIVATE d4np::d4np)
+#
+# The library links the platform threads library publicly (the concurrency module wraps
+# pthread/win32), so re-resolve it on the consumer side before importing the targets.
+
+include(CMakeFindDependencyMacro)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_dependency(Threads)
+
+include("${CMAKE_CURRENT_LIST_DIR}/d4np-cTargets.cmake")
+
+check_required_components(d4np-c)

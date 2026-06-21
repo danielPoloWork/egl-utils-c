@@ -187,3 +187,35 @@ jobs:
           path: docs/doxygen/html
           if-no-files-found: ignore
 
+  # Install/export gate (M8.3) — prove `find_package(d4np-c)` works against a real install
+  # prefix on every platform. See ADR-0005.
+  install:
+    name: install / find_package consumer / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022, macos-14]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: lukka/get-cmake@e0566b3900d662ef5b1dc36fb560c4d2b1b6d6bd # v4.3.3
+      - name: Set up MSVC environment
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+        with: { arch: x64 }
+      - name: Configure, build, and install d4np-c
+        shell: bash
+        run: |
+          cmake -S . -B build/install -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release -DD4NP_BUILD_TESTS=OFF -DD4NP_INSTALL=ON
+          cmake --build build/install
+          cmake --install build/install --prefix "$PWD/_prefix"
+      - name: Build the find_package consumer against the install prefix
+        shell: bash
+        run: |
+          cmake -S packaging/consumer-test -B build/consumer -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$PWD/_prefix"
+          cmake --build build/consumer
+          ctest --test-dir build/consumer --output-on-failure
+
