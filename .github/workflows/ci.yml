@@ -155,7 +155,7 @@ jobs:
     runs-on: ubuntu-24.04
     env: { CC: gcc }
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: lukka/get-cmake@e0566b3900d662ef5b1dc36fb560c4d2b1b6d6bd # v4.3.3
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
@@ -177,7 +177,7 @@ jobs:
     name: docs / doxygen warnings-as-errors
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Install Doxygen + Graphviz
         run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
       - name: Build the API docs (WARN_AS_ERROR fails on any warning)
@@ -201,7 +201,7 @@ jobs:
       matrix:
         os: [ubuntu-24.04, windows-2022, macos-14]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: lukka/get-cmake@e0566b3900d662ef5b1dc36fb560c4d2b1b6d6bd # v4.3.3
       - name: Set up MSVC environment
         if: runner.os == 'Windows'
@@ -239,7 +239,7 @@ jobs:
     env:
       CC: ${{ matrix.cc }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: lukka/get-cmake@e0566b3900d662ef5b1dc36fb560c4d2b1b6d6bd # v4.3.3
       - name: Build the library under -std=c11 -pedantic-errors
         shell: bash
