@@ -39,7 +39,7 @@ jobs:
           - { os: macos-14, toolchain: apple-clang, preset: debug }
     steps:
       - name: Check out the source tree
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install a recent CMake and Ninja
         uses: lukka/get-cmake@e6906078ebd1ccb8ce51ab4626ac46a1b5a517e3 # v4.4.0
@@ -68,7 +68,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0          # i18n/version checks need full history
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
@@ -84,7 +84,7 @@ jobs:
     name: format / clang-format check
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           python-version: '3.12'
@@ -100,14 +100,14 @@ jobs:
     name: cppcheck / static analysis
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
       - run: sudo apt-get update && sudo apt-get install -y cppcheck
       - run: cppcheck --enable=warning,portability --error-exitcode=1 d4np/
   valgrind:
     name: valgrind / leak-check=full
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
       - uses: lukka/get-cmake@e6906078ebd1ccb8ce51ab4626ac46a1b5a517e3 # v4.3.3
       - run: sudo apt-get update && sudo apt-get install -y valgrind
       - name: Build the unit tests
@@ -123,7 +123,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install a recent CMake and Ninja
         uses: lukka/get-cmake@e6906078ebd1ccb8ce51ab4626ac46a1b5a517e3 # v4.4.0
       - name: Set up MSVC environment
@@ -144,7 +144,7 @@ jobs:
     runs-on: ubuntu-24.04
     env: { CC: clang }
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
       - uses: lukka/get-cmake@e6906078ebd1ccb8ce51ab4626ac46a1b5a517e3 # v4.3.3
       - name: Build + test under ThreadSanitizer
         run: cmake --preset tsan && cmake --build --preset tsan && ctest --preset tsan --output-on-failure
@@ -155,7 +155,7 @@ jobs:
     runs-on: ubuntu-24.04
     env: { CC: gcc }
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
       - uses: lukka/get-cmake@06fec8f1da5f120990504a9da3e9891d71fb89ac # v4.3.3
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
@@ -177,7 +177,7 @@ jobs:
     name: docs / doxygen warnings-as-errors
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
       - name: Install Doxygen + Graphviz
         run: sudo apt-get update && sudo apt-get install -y doxygen graphviz
       - name: Build the API docs (WARN_AS_ERROR fails on any warning)
@@ -201,7 +201,7 @@ jobs:
       matrix:
         os: [ubuntu-24.04, windows-2022, macos-14]
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
       - uses: lukka/get-cmake@06fec8f1da5f120990504a9da3e9891d71fb89ac # v4.3.3
       - name: Set up MSVC environment
         if: runner.os == 'Windows'
@@ -239,7 +239,7 @@ jobs:
     env:
       CC: ${{ matrix.cc }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7.0.1
       - uses: lukka/get-cmake@06fec8f1da5f120990504a9da3e9891d71fb89ac # v4.3.3
       - name: Build the library under -std=c11 -pedantic-errors
         shell: bash
