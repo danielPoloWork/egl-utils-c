@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Install a recent CMake and Ninja
-        uses: lukka/get-cmake@e6906078ebd1ccb8ce51ab4626ac46a1b5a517e3 # v4.4.0
+        uses: lukka/get-cmake@fffaaafeea488556c2c12dad60690008bc1caacb # v4.4.2
       - name: Set up MSVC environment
         if: matrix.toolchain == 'msvc'
         uses: ilammy/msvc-dev-cmd@v1
@@ -108,7 +108,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: lukka/get-cmake@e6906078ebd1ccb8ce51ab4626ac46a1b5a517e3 # v4.3.3
+      - uses: lukka/get-cmake@fffaaafeea488556c2c12dad60690008bc1caacb # v4.3.3
       - run: sudo apt-get update && sudo apt-get install -y valgrind
       - name: Build the unit tests
         run: cmake --preset debug && cmake --build --preset debug
@@ -125,7 +125,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install a recent CMake and Ninja
-        uses: lukka/get-cmake@e6906078ebd1ccb8ce51ab4626ac46a1b5a517e3 # v4.4.0
+        uses: lukka/get-cmake@fffaaafeea488556c2c12dad60690008bc1caacb # v4.4.2
       - name: Set up MSVC environment
         if: matrix.toolchain == 'msvc'
         uses: ilammy/msvc-dev-cmd@v1
@@ -145,7 +145,7 @@ jobs:
     env: { CC: clang }
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: lukka/get-cmake@e6906078ebd1ccb8ce51ab4626ac46a1b5a517e3 # v4.3.3
+      - uses: lukka/get-cmake@fffaaafeea488556c2c12dad60690008bc1caacb # v4.3.3
       - name: Build + test under ThreadSanitizer
         run: cmake --preset tsan && cmake --build --preset tsan && ctest --preset tsan --output-on-failure
 
@@ -156,7 +156,7 @@ jobs:
     env: { CC: gcc }
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: lukka/get-cmake@06fec8f1da5f120990504a9da3e9891d71fb89ac # v4.3.3
+      - uses: lukka/get-cmake@df5af53b16a97f40f410ca9e702b67007104eea0 # v4.3.3
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.12'
@@ -202,7 +202,7 @@ jobs:
         os: [ubuntu-24.04, windows-2022, macos-14]
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: lukka/get-cmake@06fec8f1da5f120990504a9da3e9891d71fb89ac # v4.3.3
+      - uses: lukka/get-cmake@df5af53b16a97f40f410ca9e702b67007104eea0 # v4.3.3
       - name: Set up MSVC environment
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
@@ -240,7 +240,7 @@ jobs:
       CC: ${{ matrix.cc }}
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: lukka/get-cmake@06fec8f1da5f120990504a9da3e9891d71fb89ac # v4.3.3
+      - uses: lukka/get-cmake@df5af53b16a97f40f410ca9e702b67007104eea0 # v4.3.3
       - name: Build the library under -std=c11 -pedantic-errors
         shell: bash
         run: cmake --preset pedantic && cmake --build --preset pedantic
